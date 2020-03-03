@@ -1,26 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import Home from "./components/Home/Home";
+import Login from "./components/Login/Login";
+import "./styles/App.scss";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+
+  render() {
+    return (
+      <React.Fragment>
+        <Header></Header>
+        <Switch>
+          <Route
+            extact
+            path="/home"
+            render={() => {
+              return <Home></Home>;
+            }}
+          />
+          <Route
+            extact
+            path="/login"
+            render={() => {
+              return <Login></Login>;
+            }}
+          />
+          <Route
+            extact
+            path="/"
+            render={() => {
+              return (
+                <Link to="/home">
+                  <button>Let's Party!</button>
+                </Link>
+              );
+            }}
+          />
+        </Switch>
+        <Footer></Footer>
+      </React.Fragment>
+    );
+  }
 }
-
-export default App;
