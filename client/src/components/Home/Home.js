@@ -1,8 +1,8 @@
 import React, { Component } from "react";
+import "./Home.scss";
 import AuthService from "../API/AuthService";
 import axios from "axios";
 import querystring from "querystring";
-import "./Home.scss";
 
 export default class Home extends Component {
   constructor() {
@@ -12,7 +12,6 @@ export default class Home extends Component {
   }
 
   test() {
-    // this.service.loggedin()
     axios
       .post(
         "https://accounts.spotify.com/api/token",
@@ -31,6 +30,7 @@ export default class Home extends Component {
       )
       .then(tokenData => {
         console.log(tokenData);
+
       });
   }
 
@@ -38,7 +38,6 @@ export default class Home extends Component {
     return (
       <div>
         <h1> I 'm the home</h1>{" "}
-        <button onClick={() => this.test()}> Test who I am </button>{" "}
       </div>
     );
   }
