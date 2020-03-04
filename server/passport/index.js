@@ -1,7 +1,9 @@
 const passport = require('passport');
 
+console.log("index.js siendo llamado")
+
 require('./serializers');
-require('./localStrategy');
+require('./spotifyStrategy');
 
 module.exports = (app)  => {
   app.use(passport.initialize());
