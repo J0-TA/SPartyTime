@@ -38,7 +38,6 @@ export default class App extends Component {
       this.setState({
         loggedInUser: response
       });
-      console.log(this.state.loggedInUser)
     })
     .catch(err => {
       this.setState({
@@ -48,38 +47,72 @@ export default class App extends Component {
   }
 
   render() {
-    return (
-      <React.Fragment>
-        <Header></Header>
-        <Switch>
-          <Route
-            extact
-            path="/home"
-            render={() => {
-              return <Home user={this.state.loggedInUser}></Home>;
-            }}
-          />
-          <Route
-            extact
-            path="/login"
-            render={() => {
-              return <Login></Login>;
-            }}
-          />
-          <Route
-            extact
-            path="/"
-            render={() => {
-              return (
-                <Link to="/home">
-                  <button>Let's Party!</button>
-                </Link>
-              );
-            }}
-          />
-        </Switch>
-        <Footer></Footer>
-      </React.Fragment>
-    );
+    console.log(this.state.loggedInUser)
+    if(this.state.loggedInUser) {
+      return (
+        <React.Fragment>
+          <Header></Header>
+          <Switch>
+            <Route
+              extact
+              path="/home"
+              render={() => {
+                return <Home user={this.state.loggedInUser}></Home>;
+              }}
+            />
+            <Route
+              extact
+              path="/login"
+              redirect="/home"
+            />
+            <Route
+              extact
+              path="/"
+              render={() => {
+                return (
+                  <Link to="/home">
+                    <button>Let's Party!</button>
+                  </Link>
+                );
+              }}
+            />
+          </Switch>
+          <Footer></Footer>
+        </React.Fragment>
+      );
+    } else {
+      return (
+        <React.Fragment>
+          <Header></Header>
+          <Switch>
+            <Route
+              extact
+              path="/home"
+              Redirect="/login"
+            />
+            <Route
+              extact
+              path="/login"
+              render={() => {
+                return <Login></Login>;
+              }}
+            />
+            <Route
+              extact
+              path="/"
+              render={() => {
+                return (
+                  <Link to="/home">
+                    <button>Let's Party!</button>
+                  </Link>
+                );
+              }}
+            />
+          </Switch>
+          <Footer></Footer>
+        </React.Fragment>
+      );
+    }
+    
   }
 }
