@@ -25,12 +25,6 @@ export default class App extends Component {
     });
   };
 
-  logout = () => {
-    this.service.logout().then(() => {
-      this.setState({ loggedInUser: null });
-    });
-  };
-
   fetchUser() {
     return this.service
     .loggedin()
@@ -47,7 +41,6 @@ export default class App extends Component {
   }
 
   render() {
-    console.log(this.state.loggedInUser)
     if(this.state.loggedInUser) {
       return (
         <React.Fragment>
@@ -59,11 +52,6 @@ export default class App extends Component {
               render={() => {
                 return <Home user={this.state.loggedInUser}></Home>;
               }}
-            />
-            <Route
-              extact
-              path="/login"
-              redirect="/home"
             />
             <Route
               extact
@@ -87,11 +75,6 @@ export default class App extends Component {
           <Switch>
             <Route
               extact
-              path="/home"
-              Redirect="/login"
-            />
-            <Route
-              extact
               path="/login"
               render={() => {
                 return <Login></Login>;
@@ -102,7 +85,7 @@ export default class App extends Component {
               path="/"
               render={() => {
                 return (
-                  <Link to="/home">
+                  <Link to="/login">
                     <button>Let's Party!</button>
                   </Link>
                 );

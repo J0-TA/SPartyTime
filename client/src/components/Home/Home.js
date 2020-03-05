@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Home.scss";
 import AuthService from "../../services/AuthService";
+import { Redirect } from "react-router-dom";
 
 export default class Home extends Component {
   constructor(props) {
@@ -11,6 +12,11 @@ export default class Home extends Component {
 
     this.service = new AuthService();
   }
+  logout = () => {
+    this.service.logout().then(() => {
+      this.setState({ loggedInUser: null });
+    });
+  };
 
   // Esta es la megapetición a axios que se trabajó con Dani, puede que tenga que usarse para
   // refrescar el token y mantener la sesión activa más de una hora
@@ -39,29 +45,20 @@ export default class Home extends Component {
   // }
   // ---------------------------------------------------------
 
-  handleLogOut() {
-    console.log(this.state.loggedInUser)
-
-    this.service.logout()
-    .then(() => {
-      this.setState({ loggedInUser: null });
-    });
-    console.log(this.state.loggedInUser)
-  }
-
   render() {
-    // console.log(this.props.user)
-    // console.log("lo de abajo es del estado, lo de arriba de las props.user")
-    // console.log(this.props.loggedInUser)
-    return (
-      <section>
-        <button onClick={() => this.handleLogOut()}>
-          Log Out <span>x</span>
-        </button>
-        <div>
-          <h1> I 'm the home</h1>
-        </div>
-      </section>
-    );
+    if (this.state.loggedInUser) {
+      return (
+        <section>
+          <button onClick={() => this.logout()}>
+            Log Out <span>x</span>
+          </button>
+          <div>
+            <h1> I 'm the home</h1>
+          </div>
+        </section>
+      );
+    } else {
+      return <Redirect to="/" />;
+    }
   }
 }
