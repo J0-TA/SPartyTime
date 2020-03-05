@@ -5,9 +5,47 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
+import AuthService from "./services/AuthService";
 import "./styles/App.scss";
 
 export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loggedInUser: null
+    };
+    this.service = new AuthService();
+
+    this.fetchUser();
+  }
+
+  getUser = userObj => {
+    this.setState({
+      loggedInUser: userObj
+    });
+  };
+
+  logout = () => {
+    this.service.logout().then(() => {
+      this.setState({ loggedInUser: null });
+    });
+  };
+
+  fetchUser() {
+    return this.service
+    .loggedin()
+    .then(response => {
+      this.setState({
+        loggedInUser: response
+      });
+      console.log(this.state.loggedInUser)
+    })
+    .catch(err => {
+      this.setState({
+        loggedInUser: false,
+      });
+    });
+  }
 
   render() {
     return (
@@ -18,7 +56,7 @@ export default class App extends Component {
             extact
             path="/home"
             render={() => {
-              return <Home></Home>;
+              return <Home user={this.state.loggedInUser}></Home>;
             }}
           />
           <Route
