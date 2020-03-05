@@ -8,13 +8,10 @@ passport.use(
   new SpotifyStrategy({
       clientID: process.env.SPOTIFY_CLIENT_ID,
       clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-      // callbackURL: `http://localhost:3000/home/callback`
       callbackURL: `http://localhost:4000/api/auth/spotify/callback`
     },
     function (accessToken, refreshToken, expires_in, profile, done) {
-      console.log("accessToken=", accessToken)
-      console.log("refreshToken=", refreshToken)
-      console.log(done)
+      console.log(profile)
       console.log("*".repeat(100))
 
       User.find({
@@ -22,11 +19,14 @@ passport.use(
         })
         .then(foundUser => {
           if (foundUser.length > 0) {
-            User.update({
+            User.updateOne({
               spotifyID: profile.id
             }, {
               token: accessToken,
-              refreshToken: refreshToken
+              refreshToken: refreshToken,
+              photo: profile.photos[0],
+              product: profile.product,
+              spotifyUri: profile._json.uri
             }, function (err, user) {
               return done(err, foundUser[0]);
             })
@@ -34,7 +34,10 @@ passport.use(
             User.create({
               spotifyID: profile.id,
               token: accessToken,
-              refreshToken: refreshToken
+              refreshToken: refreshToken,
+              photo: profile.photos[0],
+              product: profile.product,
+              spotifyUri: profile._json.uri
             }, function (err, userCreated) {
               return done(err, userCreated);
             })

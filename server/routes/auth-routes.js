@@ -19,7 +19,6 @@ router.get(
   }
 );
 
-//Resto de endpoints que creo que no es necesario reformular
 router.get('/auth/currentUser', (req, res, next) => {
   if (req.user) {
     res.status(200).json(req.user)

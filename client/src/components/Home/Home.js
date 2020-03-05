@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import "./Home.scss";
-import AuthService from "../API/AuthService";
+import AuthService from "../../services/AuthService";
 import axios from "axios";
 import querystring from "querystring";
 
 export default class Home extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.service = new AuthService();
   }
@@ -35,9 +35,10 @@ export default class Home extends Component {
   }
 
   render() {
+    console.log(this.props.user)
     return (
       <div>
-        <h1> I 'm the home</h1>{" "}
+        <h1> I 'm the home</h1>
       </div>
     );
   }

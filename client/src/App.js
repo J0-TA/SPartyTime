@@ -5,7 +5,7 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
-import AuthService from "./components/API/AuthService";
+import AuthService from "./services/AuthService";
 import "./styles/App.scss";
 
 export default class App extends Component {
@@ -38,6 +38,7 @@ export default class App extends Component {
       this.setState({
         loggedInUser: response
       });
+      console.log(this.state.loggedInUser)
     })
     .catch(err => {
       this.setState({
@@ -47,11 +48,6 @@ export default class App extends Component {
   }
 
   render() {
-    if (this.state.loggedInUser) {
-
-    }
-
-
     return (
       <React.Fragment>
         <Header></Header>
@@ -60,7 +56,7 @@ export default class App extends Component {
             extact
             path="/home"
             render={() => {
-              return <Home></Home>;
+              return <Home user={this.state.loggedInUser}></Home>;
             }}
           />
           <Route
