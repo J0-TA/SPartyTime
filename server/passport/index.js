@@ -1,7 +1,5 @@
 const passport = require('passport');
 
-console.log("index.js siendo llamado")
-
 require('./serializers');
 require('./spotifyStrategy');
 

@@ -19,7 +19,7 @@ export default class Login extends Component {
           {/* <button onClick={() => this.handleLogin()}>
             Log In with Spotify
           </button> */}
-          <a href="http://localhost:4000/api/auth/spotify">
+          <a href={`${process.env.REACT_APP_API_URL}/auth/spotify`}>
             Log In with Spotify
           </a>
         </div>

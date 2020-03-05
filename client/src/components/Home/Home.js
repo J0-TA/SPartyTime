@@ -18,7 +18,7 @@ export default class Home extends Component {
         querystring.stringify({
           grant_type: "authorization_code",
           code: window.location.href.split("code=")[1],
-          redirect_uri: "http://localhost:3000/home/callback"
+          redirect_uri: `${process.env.REACT_APP_URL}/home/callback`
         }),
         {
           headers: {

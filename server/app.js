@@ -98,7 +98,11 @@ app.use(session({
 
 require('./passport')(app);
 
-const authRoutes = require('./routes/auth-routes');
-app.use('/api', authRoutes);
+const index = require('./routes');
+app.use('/', index);
+
+app.use((req,res)=> {
+  res.sendFile(__dirname + "/public/index.html");
+});
 
 module.exports = app;

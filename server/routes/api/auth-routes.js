@@ -1,10 +1,12 @@
+require('dotenv').config();
+
 const express = require("express");
 const passport = require('passport');
 const router = express.Router();
-const User = require("../models/User");
+const User = require("../../models/User");
 
 router.get(
-  '/auth/spotify',
+  '/spotify',
   passport.authenticate('spotify', {
     scope: ['user-modify-playback-state', 'playlist-modify-public', 'user-read-private']
   }),
@@ -12,14 +14,14 @@ router.get(
 );
 
 router.get(
-  '/auth/spotify/callback',
+  '/spotify/callback',
   passport.authenticate('spotify'),
   function (req, res) {
-    res.redirect("http://localhost:3000/home")
+    res.redirect(`${process.env.FRONT_BASE_URL}/home`)
   }
 );
 
-router.get('/auth/currentUser', (req, res, next) => {
+router.get('/currentUser', (req, res, next) => {
   if (req.user) {
     res.status(200).json(req.user)
   } else {
@@ -27,7 +29,7 @@ router.get('/auth/currentUser', (req, res, next) => {
   }
 });
 
-router.get('/auth/logout', (req, res) => {
+router.get('/logout', (req, res) => {
   req.logout();
   res.status(200).json({
     message: 'logged out'
