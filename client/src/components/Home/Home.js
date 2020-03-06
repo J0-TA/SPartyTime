@@ -9,7 +9,8 @@ export default class Home extends Component {
     super(props);
     this.state = {
       loggedInUser: this.props.user,
-      userParties: []
+      userParties: [],
+      newParty: null
     };
     this.partyService = new PartyService();
     this.authService = new AuthService();
@@ -30,12 +31,20 @@ export default class Home extends Component {
     });
   };
 
+  handleCreate(){
+    this.partyService.createParty(this.state.loggedInUser._id).then(createdParty => {
+      this.setState({newParty: createdParty})
+    })
+  }
+
   componentDidMount() {
     this.getAllParties();
   }
 
   render() {
-    if (this.state.loggedInUser && this.state.userParties.length !== 0) {
+    if(this.state.newParty)
+    return <Redirect to={"/create/"+this.state.newParty._id+"/1"}/>
+    if (this.state.loggedInUser) {
       return (
         <section className="Home">
           <button className="Logout" onClick={() => this.logout()}>
@@ -50,19 +59,25 @@ export default class Home extends Component {
               />
             </div>
             <div className="partiesSlider">
-              {this.state.userParties.forEach(party => {
+              {this.state.userParties.map(party => {
                 return (
-                <div className="partyIcon">
-                  <img src={party.photo} alt={party.name} />
-                  <h5>{party.name}</h5>
-                </div>);
+                  <div className="partyIcon">
+                    <img src={party.image_url} alt={party.name} height="100"/>
+                    <h5>{party.name}</h5>
+                  </div>
+                );
               })}
             </div>
+          </div>
+          <div className="newParty">
+          <button onClick={()=> this.handleCreate()}>
+              <h2>Create a new Party</h2>
+          </button>
           </div>
         </section>
       );
     } else {
       return <Redirect to="/" />;
     }
-  } 
+  }
 }

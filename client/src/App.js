@@ -6,6 +6,7 @@ import Footer from "./components/Footer/Footer";
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
 import AuthService from "./services/AuthService";
+import Create from "./components/Create/Create";
 import "./styles/App.scss";
 
 export default class App extends Component {
@@ -55,11 +56,19 @@ export default class App extends Component {
             />
             <Route
               extact
+              path="/create"
+              render={() => {
+                return <Create user={this.state.loggedInUser}></Create>;
+              }}
+            />
+            <Route
+              extact
               path="/"
               render={() => {
                 return (
                   <Link to="/home">
-                    <button>Let's Party!</button>
+                    <button><h2>Let's Party!</h2>
+                    </button>
                   </Link>
                 );
               }}
@@ -86,7 +95,8 @@ export default class App extends Component {
               render={() => {
                 return (
                   <Link to="/login">
-                    <button>Let's Party!</button>
+                    <button><h2>Let's Party!</h2>
+                    </button>
                   </Link>
                 );
               }}
@@ -95,7 +105,6 @@ export default class App extends Component {
           <Footer></Footer>
         </React.Fragment>
       );
-    }
-    
+    }   
   }
 }

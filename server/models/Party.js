@@ -3,8 +3,6 @@ const Schema = mongoose.Schema;
 
 const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
-let defaultPhoto = randomInt(1,4).toString();
-
 const partySchema = new Schema({
     name: {
         type:String,
@@ -12,7 +10,7 @@ const partySchema = new Schema({
     },
     image_url: {
         type:String,
-        default: `../images/default${defaultPhoto}.jpg`
+        default: `https://source.unsplash.com/random?music-party`
     },
     forbiddenGenres: {
         type: [Array],

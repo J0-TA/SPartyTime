@@ -16,8 +16,8 @@ export default class PartyService {
         .then(response => response.data)
     };
 
-    createParty = () => {
-        return this.service.post('/create', )
+    createParty = (id) => {
+        return this.service.post('/create', {user: id})
         .then(response => response.data)
     }
 
