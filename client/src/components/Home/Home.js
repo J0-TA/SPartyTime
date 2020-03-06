@@ -1,64 +1,68 @@
 import React, { Component } from "react";
-import "./Home.scss";
 import AuthService from "../../services/AuthService";
+import PartyService from "../../services/PartyService";
 import { Redirect } from "react-router-dom";
+import "./Home.scss";
 
 export default class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedInUser: this.props.user
+      loggedInUser: this.props.user,
+      userParties: []
     };
-
-    this.service = new AuthService();
+    this.partyService = new PartyService();
+    this.authService = new AuthService();
   }
   logout = () => {
-    this.service.logout().then(() => {
+    this.authService.logout().then(() => {
       this.setState({ loggedInUser: null });
     });
   };
 
-  // Esta es la megapetición a axios que se trabajó con Dani, puede que tenga que usarse para
-  // refrescar el token y mantener la sesión activa más de una hora
+  getAllParties = () => {
+    this.partyService.getAllParties().then(allParties => {
+      this.setState({
+        userParties: allParties.filter(
+          party => party.user === this.state.loggedInUser._id
+        )
+      });
+    });
+  };
 
-  // test() {
-  //   axios
-  //     .post(
-  //       "https://accounts.spotify.com/api/token",
-  //       querystring.stringify({
-  //         grant_type: "authorization_code",
-  //         code: window.location.href.split("code=")[1],
-  //         redirect_uri: `${process.env.REACT_APP_URL}/home/callback`
-  //       }),
-  //       {
-  //         headers: {
-  //           'Content-Type': 'application/x-www-form-urlencoded',
-  //           Authorization:
-  //             "Basic YjZiNWExOTRlNmQzNDk2MWIxMjQwZmZjOWQzN2E5MWY6OWQyNzg3M2EwZWEwNGU5NzhjZTRiYTkyZTNjNWI0OTc="
-  //         }
-  //       }
-  //     )
-  //     .then(tokenData => {
-  //       console.log(tokenData);
-
-  //     });
-  // }
-  // ---------------------------------------------------------
+  componentDidMount() {
+    this.getAllParties();
+  }
 
   render() {
-    if (this.state.loggedInUser) {
+    if (this.state.loggedInUser && this.state.userParties.length !== 0) {
       return (
-        <section>
-          <button onClick={() => this.logout()}>
+        <section className="Home">
+          <button className="Logout" onClick={() => this.logout()}>
             Log Out <span>x</span>
           </button>
-          <div>
-            <h1> I 'm the home</h1>
+          <div className="dashboard">
+            <div className="userInfo">
+              <h2> Welcome {this.state.loggedInUser.spotifyID}</h2>
+              <img
+                src={this.state.loggedInUser.photo}
+                alt={this.state.loggedInUser.username}
+              />
+            </div>
+            <div className="partiesSlider">
+              {this.state.userParties.forEach(party => {
+                return (
+                <div className="partyIcon">
+                  <img src={party.photo} alt={party.name} />
+                  <h5>{party.name}</h5>
+                </div>);
+              })}
+            </div>
           </div>
         </section>
       );
     } else {
       return <Redirect to="/" />;
     }
-  }
+  } 
 }

@@ -8,11 +8,6 @@ export default class AuthService {
         });
     }
 
-    // login = () => {
-    //     return this.service.get('/spotify', )
-    //         .then(response => response.data)
-    // };
-
     loggedin = () => {
         return this.service.get('/currentUser', )
             .then(response => response.data)

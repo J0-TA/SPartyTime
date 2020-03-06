@@ -12,21 +12,25 @@ const partySchema = new Schema({
     },
     image_url: {
         type:String,
-        default: `../../client/public/default${defaultPhoto}.jpg`
+        default: `../images/default${defaultPhoto}.jpg`
     },
     forbiddenGenres: {
         type: [Array],
-        default: []
+        default: ["No forbidden genres."]
     },
     themeMusic: {
         type: [Array],
-        default: []
+        default: ["No theme music available."]
     },
     address: {
         type: String,
         default: "Any address provided"
     },
-    location: [Number],
+    location: {
+        type: [Number],
+        default: [0,0]
+    },
+
     user: {
         type: Schema.Types.ObjectId,
         ref: "User"
