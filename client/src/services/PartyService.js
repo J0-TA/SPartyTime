@@ -11,13 +11,13 @@ export default class PartyService {
         .then(response => response.data)
     };
 
-    getPartyDetails = () => {
-        return this.service.get('/:id', )
+    getPartyDetails = (id) => {
+        return this.service.get('/' + id, )
         .then(response => response.data)
     };
 
-    createParty = (id) => {
-        return this.service.post('/create', {user: id})
+    createParty = (party) => {
+        return this.service.post('/create', party)
         .then(response => response.data)
     }
 
@@ -26,8 +26,8 @@ export default class PartyService {
         .then(response => response.data)
     }
 
-    deteleParty = () => {
-        return this.service.delete('/:id', )
+    deleteParty = (id) => {
+        return this.service.delete('/' + id, )
         .then(response => response.data)
     }
 }

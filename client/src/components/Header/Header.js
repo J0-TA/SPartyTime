@@ -7,7 +7,7 @@ export default class Header extends Component {
     return (
       <Link to="/">
         <header>
-          <h1>SPartyTime</h1>
+          <h1>SParty</h1>
         </header>
       </Link>
     );

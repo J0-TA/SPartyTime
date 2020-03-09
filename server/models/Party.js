@@ -5,33 +5,44 @@ const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min
 
 const partySchema = new Schema({
     name: {
-        type:String,
-        default: "New party"
+        type: String,
+        default: "New Sparty"
     },
     image_url: {
-        type:String,
-        default: `https://source.unsplash.com/random?music-party`
-    },
-    forbiddenGenres: {
-        type: [Array],
-        default: ["No forbidden genres."]
-    },
-    themeMusic: {
-        type: [Array],
-        default: ["No theme music available."]
+        type: String,
+        default: `../images/default${randomInt(1,4)}.jpg`
+        //`https://source.unsplash.com/random?music-party`
     },
     address: {
         type: String,
         default: "Any address provided"
     },
+
+    addressDetails: {
+        type: String,
+        default: ""
+    },
+
     location: {
         type: [Number],
-        default: [0,0]
+        default: null
+    },
+
+    hour: {
+        type: String,
+        default: ""
     },
 
     user: {
         type: Schema.Types.ObjectId,
         ref: "User"
+    },
+
+    userToken: String,
+
+    playlist: {
+        type: String,
+        default: "37i9dQZEVXbMDoHDwVN2tF"
     }
 
 }, {

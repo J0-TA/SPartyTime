@@ -1,75 +1,159 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Switch, Route } from "react-router-dom";
-import PartyService from "../../services/PartyService"
+import { Switch, Route, Redirect, withRouter } from "react-router-dom";
+import PartyService from "../../services/PartyService";
+import CreateName from "./CreateName/CreateName";
+import CreateEvent from "./CreateEvent/CreateEvent";
+import Party from "./Party/Party";
+import SpotifyService from "../../services/SpotifyService";
 import "./Create.scss";
+import Edit from "./Edit/Edit";
 
-export default class Create extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-          loggedInUser: this.props.user,
-          party: {_id: this.props.match.params}
-        };
-        this.PartyService=new PartyService();
-    }
+class Create extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loggedInUser: this.props.user,
+      party: {
+        user: this.props.user._id,
+        userToken: this.props.user.token
+      },
+      playlistDetails: {
+        public: false,
+        collaborative: true
+      },
+      partyCreated: null
+    };
+    this.partyService = new PartyService();
+    this.spotifyService = new SpotifyService();
+  }
 
-    getPartyDetails = () => {
-         this.partyService.getPartyDetails(this.state.party._id)
-        .then(party => {
-            this.setState({
-                ...this.state,
-                party: party
-            })
-        })
-    }
-    
-    componentDidMount(){
-        this.getPartyDetails()
-        console.log(this.state.party)
-    }
+  updateName(e) {
+    let newState = {
+      ...this.state
+    };
+    newState.party.name = e.target.value;
+    newState.playlistDetails.name = e.target.value;
+    newState.playlistDetails.description =
+      e.target.value + ". Made with SpartyTime";
+    this.setState(newState);
+  }
+  updateAddress(e) {
+    let newState = {
+      ...this.state
+    };
+    newState.party.address = e.target.value;
+    this.setState(newState);
+  }
+  updateAddressDetails(e) {
+    let newState = {
+      ...this.state
+    };
+    newState.party.addressDetails = e.target.value;
+    this.setState(newState);
+  }
+  updateHour(e) {
+    let newState = {
+      ...this.state
+    };
+    newState.party.hour = e.target.value;
+    this.setState(newState);
+  }
 
+  createPlaylist() {
+    let newState = {
+      ...this.state
+    };
+    this.spotifyService
+      .createPlaylist(
+        this.state.playlistDetails,
+        this.state.loggedInUser.spotifyID,
+        this.state.loggedInUser.token
+      )
+      .then(createdPlaylist => {
+        newState.party.playlist = createdPlaylist.id;
+        newState.party.image_url = createdPlaylist.images[0];
+      });
+    this.setState(newState);
+  }
+  handleCreateParty() {
+    this.partyService.createParty(this.state.party).then(createdParty =>
+      this.setState(
+        {
+          ...this.state,
+          party: createdParty,
+          partyCreated: true
+        },
+        () => this.props.history.push("/party/" + createdParty._id)
+      )
+    );
+  }
 
-    render() {
+  deleteParty(id) {
+    this.partyService.deleteParty(id).then(deletedParty => console.log(deletedParty));
+    this.props.history.push("/home")
+  }
 
+  render() {
     return (
       <Switch>
         <Route
           extact
-          path="/create/:id/1"
-          render={(props) => {
-            return <h1>Hola, estoy en create/{props.match.params.id}/1</h1>;
+          path="/party/name"
+          render={() => {
+            return (
+              <CreateName
+                updateName={e => this.updateName(e)}
+                handleCreatePlaylist={() => this.createPlaylist()}
+                party={this.state.party}
+              ></CreateName>
+            );
           }}
         />
         <Route
           extact
-          path="/create/:id/2"
+          path="/party/event"
           render={() => {
-            return <h1>Hola, estoy en create/id/2</h1>;
+            return (
+              <CreateEvent
+                updateAddress={e => this.updateAddress(e)}
+                updateAddressDetails={e => this.updateAddressDetails(e)}
+                updateHour={e => this.updateHour(e)}
+                party={this.state.party}
+                handleCreateParty={() => this.handleCreateParty()}
+              ></CreateEvent>
+            );
           }}
         />
         <Route
           extact
-          path="/create/:id/3"
+          path="/party/:id/edit"
           render={() => {
-            return <h1>Hola, estoy en create/id/3</h1>;
+            return <Edit user={this.state.loggedInUser}> </Edit>;
           }}
         />
         <Route
           extact
-          path="/create/:id/4"
+          path="/party/:id/share"
           render={() => {
-            return <h1>Hola, estoy en create/id/4</h1>;
+            return <h1> Share page </h1>;
           }}
         />
         <Route
           extact
-          path="/create/:id/5"
+          path="/party/:id"
           render={() => {
-            return <h1>Hola, estoy en create/id/5</h1>;
+            return (
+              <Party
+                user={this.state.loggedInUser}
+                deleteParty={id => this.deleteParty(id)}
+              >
+              </Party>
+            );
           }}
         />
       </Switch>
     );
   }
 }
+
+export default withRouter(Create);

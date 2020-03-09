@@ -8,7 +8,7 @@ const User = require("../../models/User");
 router.get(
   '/spotify',
   passport.authenticate('spotify', {
-    scope: ['user-modify-playback-state', 'playlist-modify-public', 'user-read-private']
+    scope: ['user-modify-playback-state', 'playlist-modify-public', 'user-read-private', 'playlist-modify-private']
   }),
   function (req, res) {}
 );
