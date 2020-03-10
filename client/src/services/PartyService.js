@@ -21,8 +21,8 @@ export default class PartyService {
         .then(response => response.data)
     }
 
-    updateParty = () => {
-        return this.service.put('/:id', )
+    updateParty = (id, party) => {
+        return this.service.put('/' + id, party)
         .then(response => response.data)
     }
 

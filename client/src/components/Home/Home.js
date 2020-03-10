@@ -22,13 +22,24 @@ export default class Home extends Component {
 
   getUserParties = () => {
     this.partyService.getAllParties().then(allParties => {
-      this.setState({
-        userParties: allParties.filter(
-          party => party.user === this.state.loggedInUser._id
-        )
-      });
+      this.setState(
+        {
+          userParties: allParties.filter(
+            party => party.user === this.state.loggedInUser._id
+          )
+        },
+        this.updateAccessToken()
+      );
     });
   };
+
+  updateAccessToken() {
+    let newState = { ...this.state };
+    newState.userParties = newState.userParties.map(
+      party => (party.userToken = newState.loggedInUser.token)
+    );
+    this.setState(newState);
+  }
 
   componentDidMount() {
     this.getUserParties();
@@ -50,9 +61,9 @@ export default class Home extends Component {
               />
             </div>
             <div className="partiesSlider">
-              {this.state.userParties.map(party => {
+              {this.state.userParties.map((party, idx) => {
                 return (
-                  <Link to={'/party/' + party._id}>
+                  <Link to={"/party/" + party._id} key={idx}>
                     <div className="partyIcon">
                       <img
                         src={party.image_url}

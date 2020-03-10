@@ -9,13 +9,57 @@ export default class SpotifyService {
 
   createPlaylist = (playlistDetails, user, accessToken) => {
     const myHeaders = {
-        "Authorization": "Bearer " + accessToken
+      "Authorization": "Bearer " + accessToken
     }
     return this.service
-      .post(`users/${user}/playlists`, playlistDetails, {headers: myHeaders})
+      .post(`users/${user}/playlists`, playlistDetails, {
+        headers: myHeaders
+      })
       .then(response => response.data);
   };
+
+  searchSongs = (query, accessToken) => {
+    const myHeaders = {
+      "Authorization": "Bearer " + accessToken
+    }
+    return this.service
+      .get(`search?q=${query}&type=track&limit=20`, {
+        headers: myHeaders
+      })
+      .then(response => response.data)
+  }
+  addSongToPlaylist = (song, playlist, accessToken, user) => {
+    console.log(song)
+    console.log(playlist)
+    const myHeaders = {
+      "Authorization": "Bearer " + accessToken
+    }
+    const songToAdd = {
+      "uris": [song]
+    }
+
+    this.service
+      .post(`users/${user}/playlists/${playlist}/tracks`, songToAdd, {
+        headers: myHeaders
+      })
+      .then(response => response.data)
+  }
+  addSongToQueue = (song, accessToken) => {
+    console.log(song)
+    console.log(accessToken)
+    
+    const myHeaders = {
+      "Authorization": "Bearer " + accessToken
+    }
+    this.service
+      .post(`https://api.spotify.com/v1/me/player/queue?uri=${song}`, {
+        headers: myHeaders
+      })
+      .then(response => response.data)
+  }
 }
+
+
 // Esta es la megapetición a axios que se trabajó con Dani, puede que tenga que usarse para
 // refrescar el token y mantener la sesión activa más de una hora
 

@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import "./CreateEvent.scss";
-import { Link } from "react-router-dom";
-import Map from "../../Map/Map";
 
 export default class CreateEvent extends Component {
   render() {
@@ -22,13 +20,6 @@ export default class CreateEvent extends Component {
         />
         <label htmlFor="hour">Party starts at:</label>
         <input type="time" onChange={e => this.props.updateHour(e)}></input>
-        <Map
-          google={this.props.google}
-          center={{ lat: 40.4164481, lng: -3.7040234 }}
-          height="300px"
-          zoom={12}
-          party={this.props.party}
-        />
           <button onClick={() => this.props.handleCreateParty()}>
             <h5 className="nextButton">Create</h5>
           </button>

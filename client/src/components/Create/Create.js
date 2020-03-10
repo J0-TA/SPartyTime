@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { Switch, Route, Redirect, withRouter } from "react-router-dom";
+import { Switch, Route, withRouter } from "react-router-dom";
 import PartyService from "../../services/PartyService";
 import CreateName from "./CreateName/CreateName";
 import CreateEvent from "./CreateEvent/CreateEvent";
 import Party from "./Party/Party";
 import SpotifyService from "../../services/SpotifyService";
-import "./Create.scss";
 import Edit from "./Edit/Edit";
+import "./Create.scss";
 
 class Create extends Component {
   constructor(props) {
@@ -21,7 +21,6 @@ class Create extends Component {
         public: false,
         collaborative: true
       },
-      partyCreated: null
     };
     this.partyService = new PartyService();
     this.spotifyService = new SpotifyService();
@@ -89,8 +88,10 @@ class Create extends Component {
   }
 
   deleteParty(id) {
-    this.partyService.deleteParty(id).then(deletedParty => console.log(deletedParty));
-    this.props.history.push("/home")
+    this.partyService
+      .deleteParty(id)
+      .then(_ => this.props.history.push("/home"));
+    
   }
 
   render() {
@@ -128,14 +129,13 @@ class Create extends Component {
           extact
           path="/party/:id/edit"
           render={() => {
-            return <Edit user={this.state.loggedInUser}> </Edit>;
-          }}
-        />
-        <Route
-          extact
-          path="/party/:id/share"
-          render={() => {
-            return <h1> Share page </h1>;
+            return (
+              <Edit
+                user={this.state.loggedInUser}
+                deleteParty={id => this.deleteParty(id)}
+                history={this.props.history}
+              ></Edit>
+            );
           }}
         />
         <Route
@@ -146,8 +146,7 @@ class Create extends Component {
               <Party
                 user={this.state.loggedInUser}
                 deleteParty={id => this.deleteParty(id)}
-              >
-              </Party>
+              ></Party>
             );
           }}
         />

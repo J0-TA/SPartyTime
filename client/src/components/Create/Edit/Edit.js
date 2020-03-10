@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import "./Edit.scss";
 import PartyService from "../../../services/PartyService";
-import { Redirect, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import "./Edit.scss";
 
 export default class Edit extends Component {
   constructor(props) {
@@ -23,10 +23,20 @@ export default class Edit extends Component {
       );
   }
 
+  updateParty(e, field) {
+    let newState = {...this.state};
+    newState.party[field] = e.target.value;
+    this.setState(newState);
+  }
+  saveChanges(){
+    this.partyService.updateParty(this.state.partyID, this.state.party)
+    .then(_ => this.props.history.push("/party/" + this.state.partyID))
+  }
   componentDidMount() {
     this.getPartyDetails();
   }
   render() {
+    console.log(this.state);
     if (this.state.party && this.state.loggedInUser) {
       if (this.state.loggedInUser._id === this.state.party.user) {
         return (
@@ -35,25 +45,37 @@ export default class Edit extends Component {
               <button>
                 <Link to={"/party/" + this.state.partyID}>Cancel</Link>
               </button>
-              <button>
-                <Link to={"/party/" + this.state.party._id + "edit"}>
-                  Save changes
-                </Link>
+              <button
+                onClick={() => this.props.deleteParty(this.state.partyID)}
+              >
+                Delete
               </button>
-              <button>Delete</button>
             </nav>
-            <h1>Sparty | {this.state.party.name}</h1>
-            <p>
-              Details: {this.state.party.address}.{" "}
-              {this.state.party.addressDetails}, | Hour: {this.state.party.hour}
-            </p>
-            <a href={"spotify:playlist:" + this.state.party.playlist}>
-              Check the playlist on Spotify
-            </a>
+
+            <label>Sparty</label>
+            <input
+              type="text"
+              placeholder={this.state.party.name}
+              onChange={e => this.updateParty(e, "name")}
+            />
+            <label>Details</label>
+            <input
+              type="text"
+              placeholder={this.state.party.address}
+              onChange={e => this.updateParty(e, "address")}
+            />
+            <input
+              type="text"
+              placeholder={this.state.party.addressDetails}
+              onChange={e => this.updateParty(e, "addressDetails")}
+            />
+            <input
+              type="time"
+              placeholder={this.state.party.hour}
+              onChange={e => this.updateParty(e, "hour")}
+            />
             <button>
-              <Link to={"/party/" + this.state.party._id + "share"}>
-                <h1>Share</h1>
-              </Link>
+                <h1 onClick={()=> this.saveChanges()}>Save changes</h1>
             </button>
           </section>
         );

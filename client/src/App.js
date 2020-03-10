@@ -6,10 +6,9 @@ import Footer from "./components/Footer/Footer";
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
 import AuthService from "./services/AuthService";
-import PartyService from "./services/PartyService";
 import Create from "./components/Create/Create";
-import "./styles/App.scss";
 import Party from "./components/Create/Party/Party";
+import "./styles/App.scss";
 
 export default class App extends Component {
   constructor(props) {
@@ -20,12 +19,6 @@ export default class App extends Component {
     this.authservice = new AuthService();
     this.fetchUser();
   }
-
-  // getUser = userObj => {
-  //   this.setState({
-  //     loggedInUser: userObj
-  //   });
-  // };
 
   fetchUser() {
     return this.authservice
