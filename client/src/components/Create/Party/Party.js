@@ -3,6 +3,10 @@ import "./Party.scss";
 import PartyService from "../../../services/PartyService";
 import { Link } from "react-router-dom";
 import SpotifyService from "../../../services/SpotifyService";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFacebook } from "@fortawesome/free-brands-svg-icons";
+import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+import { faSpotify } from "@fortawesome/free-brands-svg-icons";
 
 export default class Party extends Component {
   constructor(props) {
@@ -11,7 +15,8 @@ export default class Party extends Component {
     this.state = {
       loggedInUser: this.props.user,
       partyID: window.location.href.split("party/")[1],
-      foundedSongs: []
+      foundedSongs: [],
+      addedSong: false
     };
 
     this.partyService = new PartyService();
@@ -34,7 +39,8 @@ export default class Party extends Component {
       .then(foundedSongs =>
         this.setState({
           ...this.state,
-          foundedSongs: foundedSongs.tracks.items
+          foundedSongs: foundedSongs.tracks.items,
+          addedSong: false
         })
       );
   }
@@ -47,8 +53,16 @@ export default class Party extends Component {
       this.state.party.userToken,
       this.state.party.user
     );
+    let newState = {
+      ...this.state
+    };
+    newState.addedSong = true;
+    newState.foundedSongs = [];
 
-    console.log("added");
+    this.setState(newState);
+    document.querySelector("input").value = "";
+
+    
   }
 
   componentDidMount() {
@@ -99,6 +113,7 @@ export default class Party extends Component {
                 className="spotifyButton"
                 href={"spotify:playlist:" + this.state.party.playlist}
               >
+                <FontAwesomeIcon className="icon" icon={faSpotify} size="1x" />
                 Check the playlist on Spotify
               </a>
               <div className="socialShare">
@@ -111,7 +126,11 @@ export default class Party extends Component {
                     encodeURI(window.location.href)
                   }
                 >
-                  <i className="fab fa-whatsapp"></i>
+                  <FontAwesomeIcon
+                    className="icon"
+                    icon={faWhatsapp}
+                    size="1x"
+                  />
                   Share via Whatsapp
                 </a>
                 <a
@@ -123,7 +142,11 @@ export default class Party extends Component {
                     window.location.href
                   }
                 >
-                  <i className="fab fa-facebook"></i>
+                  <FontAwesomeIcon
+                    className="icon"
+                    icon={faFacebook}
+                    size="1x"
+                  />
                   Share via facebook
                 </a>
               </div>
@@ -136,9 +159,16 @@ export default class Party extends Component {
                 placeholder="Search..."
                 onChange={e => this.searchSongs(e)}
               />
-              <p>Matchs: {this.state.foundedSongs.length}</p>
+              <p>
+                Matchs: <span>{this.state.foundedSongs.length}</span>
+              </p>
             </div>
             <div className="searchResults">
+              {this.state.addedSong && (
+                <div className="addedSong">
+                  <h2>Song added!</h2>
+                </div>
+              )}
               {this.state.foundedSongs.map((song, idx) => {
                 return (
                   <div className="resultCard" key={idx}>
@@ -160,7 +190,6 @@ export default class Party extends Component {
                         Add to Sparty
                       </button>
                     </div>
-                    {/* <a href={song.preview_url}>Play</a> */}
                   </div>
                 );
               })}
@@ -170,33 +199,74 @@ export default class Party extends Component {
       }
     } else if (this.state.party) {
       return (
-        <section>
-          <h1>Sparty Name: {this.state.party.name}</h1>
-          <p>Main Address: {this.state.party.address}</p>
-          <p>Details: {this.state.party.addressDetails}</p>
-          <a href={"spotify:playlist:" + this.state.party.playlist}>
-            Check the playlist on Spotify
+        <section className="Party">
+          <nav>
+            <button className="no-bg">
+              <Link to="/login">Login</Link>
+            </button>
+          </nav>
+          <p className="spartyName">
+            <h1>Sparty</h1>
+            <h2>{this.state.party.name}</h2>
+          </p>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href={
+              "https://www.google.com/maps/search/" + this.state.party.address
+            }
+            className="spartyDetails"
+          >
+            Google Maps:{" "}
+            <span>
+              {this.state.party.address}. {this.state.party.addressDetails}.
+            </span>
           </a>
-          <label htmlFor="search">Search: </label>
-          <input
-            className="spotiSearch"
-            type="search"
-            placeholder="Add next song to the queue"
-            onChange={e => this.searchSongs(e)}
-          />
+          <div className="buttonContainer">
+            <a
+              className="spotifyButton"
+              href={"spotify:playlist:" + this.state.party.playlist}
+            >
+              <FontAwesomeIcon className="icon" icon={faSpotify} size="1x" />
+              Check the playlist on Spotify
+            </a>
+          </div>
+          <div className="searchContainer">
+            <label htmlFor="search">Add next song:</label>
+            <input
+              className="spotiSearch"
+              type="search"
+              placeholder="Search..."
+              onChange={e => this.searchSongs(e)}
+            />
+            <p>
+              Matchs: <span>{this.state.foundedSongs.length}</span>
+            </p>
+          </div>
           <div className="searchResults">
+            {this.state.addedSong && (
+              <div className="addedSong">
+                <h2>Song added!</h2>
+              </div>
+            )}
             {this.state.foundedSongs.map((song, idx) => {
               return (
                 <div className="resultCard" key={idx}>
-                  <img src={song.album.images[1].url} alt={song.album.name} />
-                  <h3>{song.name}</h3>
-                  <h4>{song.artists[0].name}</h4>
-                  <audio controls>
-                    <source src={song.preview_url}></source>
-                  </audio>
-                  <button onClick={() => this.addSong(song.uri)}>
-                    Add to Sparty
-                  </button>
+                  <div className="songInfo">
+                    <img src={song.album.images[1].url} alt={song.album.name} />
+                    <div className="songName">
+                      <h3>{song.name}</h3>
+                      <h4>{song.artists[0].name}</h4>
+                    </div>
+                  </div>
+                  <div className="actions">
+                    <audio controls>
+                      <source src={song.preview_url}></source>
+                    </audio>
+                    <button onClick={() => this.addSong(song.uri)}>
+                      Add to Sparty
+                    </button>
+                  </div>
                 </div>
               );
             })}

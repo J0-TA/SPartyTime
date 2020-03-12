@@ -5,11 +5,11 @@ import "./Header.scss";
 export default class Header extends Component {
   render() {
     return (
-      <Link to="/">
         <header className="Header">
+      <Link to="/">
           <h1>SPartyTime</h1>
-        </header>
       </Link>
+        </header>
     );
   }
 }

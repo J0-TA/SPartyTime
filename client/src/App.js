@@ -66,13 +66,13 @@ export default class App extends Component {
                 path="/"
                 render={() => {
                   return (
-                    <Link to="/home">
-                      <section className="Landing">
+                    <section className="Landing">
+                      <Link to="/home">
                         <button className="SpartyButton">
                           <h2>Let's Sparty!</h2>
                         </button>
-                      </section>
-                    </Link>
+                      </Link>
+                    </section>
                   );
                 }}
               />
@@ -106,13 +106,13 @@ export default class App extends Component {
                 path="/"
                 render={() => {
                   return (
-                    <Link to="/login">
-                      <section className="Landing">
+                    <section className="Landing">
+                      <Link to="/login">
                         <button className="SpartyButton">
                           <h2>Let's Sparty!</h2>
                         </button>
-                      </section>
-                    </Link>
+                      </Link>
+                    </section>
                   );
                 }}
               />

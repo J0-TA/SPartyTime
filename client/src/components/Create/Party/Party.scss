@@ -65,8 +65,9 @@
   }
   .buttonContainer {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
+    width: 100%;
     .spotifyButton {
       display: flex;
       background-color: $spotify;
@@ -84,7 +85,9 @@
   }
   .searchContainer {
     display: flex;
+    justify-content: space-around;
     align-items: baseline;
+    width: 100%;
     label {
       font-size: 1.5rem;
       color: #ffffff;
@@ -114,6 +117,10 @@
       width: 15%;
       color: #ffffff;
       margin-left: 1rem;
+
+      span {
+        color: $primary;
+      }
     }
   }
 
@@ -122,10 +129,23 @@
     height: 300px;
     display: flex;
     overflow-y: hidden;
+    .addedSong{
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      h2 {
+        color: #ffffff;
+        background-image: linear-gradient(to bottom right, $primary, #fd442c);
+        padding: 1rem 2rem;
+        font-size: 2rem;
+        border-radius: 10px;
+      }
+    }
   }
   .resultCard {
     width: auto;
-    height: 260px;
+    height: 240px;
     margin: 0 1rem;
     padding: 1rem;
     border: 1px solid #ffffff;
@@ -175,6 +195,9 @@
     }
     audio {
       width: 180px;
+      &:focus{
+        outline: none;
+      }
     }
     button {
       font-size: 1rem;
@@ -185,25 +208,36 @@
       color: #ffffff;
     }
   }
-  .socialShare{
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+  .icon {
+    margin-right: 1rem;
+  }
+  .socialShare {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-      a {
-          font-size: 1.1rem;
-          color: #ffffff;
-          padding: 0.5rem 2rem; 
-          border-radius: 10px;
-          margin-bottom: 1rem;
-          width: 166px;
+    a {
+      font-size: 1.1rem;
+      color: #ffffff;
+      padding: 0.5rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      width: 200px;
+    }
+    .whatsapp {
+      background-color: #6dd468;
+      border: 1px solid $secundary;
+      &:hover {
+        border: 1px solid #ffffff;
       }
-      .whatsapp {
-        background-color: #6DD468;
+    }
+    .facebook {
+      background-color: #3b5998;
+      border: 1px solid $secundary;
+      &:hover {
+        border: 1px solid #ffffff;
       }
-      .facebook {
-        background-color: #3B5998;
-      }
+    }
   }
 }

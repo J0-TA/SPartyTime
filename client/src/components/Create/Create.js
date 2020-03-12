@@ -7,6 +7,8 @@ import Party from "./Party/Party";
 import SpotifyService from "../../services/SpotifyService";
 import Edit from "./Edit/Edit";
 import "./Create.scss";
+const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
+
 
 class Create extends Component {
   constructor(props) {
@@ -15,7 +17,8 @@ class Create extends Component {
       loggedInUser: this.props.user,
       party: {
         user: this.props.user._id,
-        userToken: this.props.user.token
+        userToken: this.props.user.token,
+        image_url: `../images/default${randomInt(1,4)}.jpg`
       },
       playlistDetails: {
         public: false,
@@ -63,7 +66,6 @@ class Create extends Component {
       )
       .then(createdPlaylist => {
         newState.party.playlist = createdPlaylist.id;
-        newState.party.image_url = createdPlaylist.images[0];
       });
     this.setState(newState);
   }
@@ -73,7 +75,6 @@ class Create extends Component {
         {
           ...this.state,
           party: createdParty,
-          partyCreated: true
         },
         () => this.props.history.push("/party/" + createdParty._id)
       )

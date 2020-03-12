@@ -1,12 +1,11 @@
 @import '../../styles/variables.scss';
 
 .Header {
-    position: fixed;
-    top:0;
-    left:0;
     display: flex;
     justify-content: center;
     align-items: center;
+    min-width: 320px;
+    max-width: 800px;
     width: 100vw;
     height: 6rem;
     background-image: linear-gradient(to bottom right, $primary, #fd442c);

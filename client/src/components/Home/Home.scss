@@ -3,18 +3,20 @@
 .Home {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  min-width: 320px;
+  max-width: 800px;
   width: 100vw;
   height: 100vh;
   .Logout {
+    min-width: 320px;
+    max-width: 800px;
     width: 100vw;
     height: 3rem;
     font-size: 1rem;
     background-color: #000000;
     color: #ffffff;
     border: none;
-    position: fixed;
-    top: 6rem;
-    left: 0;
 
     &:hover {
       cursor: pointer;
@@ -22,12 +24,15 @@
     }
   }
   .dashboard {
-    margin-top: 10rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-width: 320px;
+    max-width: 800px;
+    width: 100vw;
     height: 50%;
     margin-bottom: 2rem;
+
 
     a {
       text-decoration: none;
@@ -36,9 +41,11 @@
     .userInfo {
       display: flex;
       justify-content: space-between;
-      padding: 0 3rem;
+      padding:  3rem;
       height: 40%;
-      width: 90vw;
+      min-width: 320px;
+      max-width: 800px;
+      width: 100vw;
       color: #ffffff;
 
       img {
@@ -70,8 +77,8 @@
       justify-content: center;
       background-color: $darkblue;
 
-      &:hover{
-        border: 1px solid $primary
+      &:hover {
+        border: 1px solid $primary;
       }
 
       img {
