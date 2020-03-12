@@ -12,10 +12,11 @@ export default class Login extends Component {
   render() {
     return (
       <section className="Login">
-        <div>
-          <a href={`${process.env.REACT_APP_API_URL}/auth/spotify`}>
-            Log In with Spotify
+        <div className="LoginBox">
+          <a className="spotifyButton"href={`${process.env.REACT_APP_API_URL}/auth/spotify`}>
+          <i className="fab fa-spotify"></i> Log In with Spotify
           </a>
+          <p>* Remember, you will need a Spotify Premium account to use SPartyTime</p>
         </div>
       </section>
     );

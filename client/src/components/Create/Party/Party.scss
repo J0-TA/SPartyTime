@@ -193,12 +193,17 @@
 
       a {
           font-size: 1.1rem;
-          background-color: #000000;
           color: #ffffff;
           padding: 0.5rem 2rem; 
           border-radius: 10px;
           margin-bottom: 1rem;
           width: 166px;
+      }
+      .whatsapp {
+        background-color: #6DD468;
+      }
+      .facebook {
+        background-color: #3B5998;
       }
   }
 }

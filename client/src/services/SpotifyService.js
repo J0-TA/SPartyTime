@@ -45,18 +45,21 @@ export default class SpotifyService {
       .then(response => response.data)
   }
   addSongToQueue = (song, accessToken) => {
-    console.log(song)
-    console.log(accessToken)
-    
+
     const myHeaders = {
       "Authorization": "Bearer " + accessToken
     }
+
+    const body = {}
     this.service
       .post(`me/player/queue?uri=${song}`, {
+        body: body
+      }, {
         headers: myHeaders
       })
       .then(response => response.data)
   }
+
 }
 
 

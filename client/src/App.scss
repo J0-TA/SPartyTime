@@ -31,10 +31,13 @@
     animation-duration: 1.5s;
     animation-iteration-count: infinite;
     font-size: 1.5rem;
+    transition: all .5s;
 
     &:hover {
       border: 1px solid #ffffff;
       cursor: pointer;
+      animation-duration: .8s;
+
     }
     &:focus {
       outline: none;
