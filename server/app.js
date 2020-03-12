@@ -35,7 +35,7 @@ const app = express();
 
 // Middleware Setup
 var whitelist = [
-  'http://localhost:3000'
+  'http://localhost:3000', "https://spartytime.herokuapp.com"
 ];
 var corsOptions = {
   origin: function (origin, callback) {

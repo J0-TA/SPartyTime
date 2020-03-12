@@ -24,13 +24,14 @@ export default class Edit extends Component {
   }
 
   updateParty(e, field) {
-    let newState = {...this.state};
+    let newState = { ...this.state };
     newState.party[field] = e.target.value;
     this.setState(newState);
   }
-  saveChanges(){
-    this.partyService.updateParty(this.state.partyID, this.state.party)
-    .then(_ => this.props.history.push("/party/" + this.state.partyID))
+  saveChanges() {
+    this.partyService
+      .updateParty(this.state.partyID, this.state.party)
+      .then(_ => this.props.history.push("/party/" + this.state.partyID));
   }
   componentDidMount() {
     this.getPartyDetails();
@@ -40,38 +41,40 @@ export default class Edit extends Component {
     if (this.state.party && this.state.loggedInUser) {
       if (this.state.loggedInUser._id === this.state.party.user) {
         return (
-          <section>
+          <section className="Edit">
             <nav>
-              <button>
+              <button className="no-bg">
                 <Link to={"/party/" + this.state.partyID}>Cancel</Link>
               </button>
               <button
+                className="no-bg"
                 onClick={() => this.props.deleteParty(this.state.partyID)}
               >
                 Delete
               </button>
             </nav>
-
-            <label>Sparty</label>
-            <input
-              type="text"
-              placeholder={this.state.party.name}
-              onChange={e => this.updateParty(e, "name")}
-            />
-            <label>Details</label>
-            <input
-              type="text"
-              placeholder={this.state.party.address}
-              onChange={e => this.updateParty(e, "address")}
-            />
-            <input
-              type="text"
-              placeholder={this.state.party.addressDetails}
-              onChange={e => this.updateParty(e, "addressDetails")}
-            />
-            <button>
-                <h1 onClick={()=> this.saveChanges()}>Save changes</h1>
-            </button>
+            <div className="form">
+              <label>Sparty</label>
+              <input
+                type="text"
+                placeholder={this.state.party.name}
+                onChange={e => this.updateParty(e, "name")}
+              />
+              <label>Address</label>
+              <input
+                type="text"
+                placeholder={this.state.party.address}
+                onChange={e => this.updateParty(e, "address")}
+              />
+              <input
+                type="text"
+                placeholder={this.state.party.addressDetails}
+                onChange={e => this.updateParty(e, "addressDetails")}
+              />
+              <button>
+                <h1 onClick={() => this.saveChanges()}>Save changes</h1>
+              </button>
+            </div>
           </section>
         );
       }

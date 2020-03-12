@@ -5,20 +5,21 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    flex: 1;
     min-width: 320px;
     max-width: 800px;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
 
     .LoginBox {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: space-around;
         align-items: center;
-        width: 300px;
-        height: 100px;
+        max-width: 300px;
+        // height: 100px;
         background-image: linear-gradient(to bottom right, $primary, #fd442c);
-        padding: 3rem;
+        padding: 2rem;
         border-radius: 5px;
 
         .spotifyButton {

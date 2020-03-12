@@ -1,38 +1,39 @@
 @import "../../styles/variables.scss";
 
+.Logout {
+  min-width: 320px;
+  max-width: 800px;
+  width: 100%;
+  height: 2.5rem;
+  font-size: 0.8rem;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+
+  &:hover {
+    cursor: pointer;
+    color: #fd442c;
+  }
+}
 .Home {
   display: flex;
   flex-direction: column;
   align-items: center;
   min-width: 320px;
   max-width: 800px;
-  width: 100vw;
-  height: 100vh;
-  .Logout {
-    min-width: 320px;
-    max-width: 800px;
-    width: 100vw;
-    height: 3rem;
-    font-size: 1rem;
-    background-color: #000000;
-    color: #ffffff;
-    border: none;
+  width: 100%;
+  height: 100%;
+  flex: 1;
 
-    &:hover {
-      cursor: pointer;
-      color: #fd442c;
-    }
-  }
   .dashboard {
     display: flex;
     flex-direction: column;
     align-items: center;
     min-width: 320px;
     max-width: 800px;
-    width: 100vw;
-    height: 50%;
+    width: 100%;
+    height: 65%;
     margin-bottom: 2rem;
-
 
     a {
       text-decoration: none;
@@ -40,12 +41,11 @@
 
     .userInfo {
       display: flex;
-      justify-content: space-between;
-      padding:  3rem;
-      height: 40%;
+      justify-content: space-around;
+      padding: 1rem;
       min-width: 320px;
       max-width: 800px;
-      width: 100vw;
+      width: 100%;
       color: #ffffff;
 
       img {
@@ -57,9 +57,8 @@
       margin: 1rem 0;
     }
     .partiesSlider {
-      width: 100vw;
+      width: 100%;
       height: 300px;
-      padding: 1rem 0rem;
       display: flex;
       overflow-y: hidden;
     }
