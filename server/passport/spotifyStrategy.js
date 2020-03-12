@@ -8,7 +8,7 @@ passport.use(
   new SpotifyStrategy({
       clientID: process.env.SPOTIFY_CLIENT_ID,
       clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-      callbackURL: `${process.env.BACK_BASE_URL}/api/auth/spotify/callback`
+      callbackURL: `${process.env.REACT_APP_API_URL}/auth/spotify/callback`
     },
     function (accessToken, refreshToken, expires_in, profile, done) {
       console.log(profile)

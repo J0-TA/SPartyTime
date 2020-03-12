@@ -17,7 +17,7 @@ router.get(
   '/spotify/callback',
   passport.authenticate('spotify'),
   function (req, res) {
-    res.redirect(`${process.env.FRONT_BASE_URL}/home`)
+    res.redirect(`${process.env.REACT_APP_URL}/home`)
   }
 );
 
