@@ -8,13 +8,13 @@ import Login from "./components/Login/Login";
 import AuthService from "./services/AuthService";
 import Create from "./components/Create/Create";
 import Party from "./components/Create/Party/Party";
-import "./styles/App.scss";
+import "./App.scss";
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedInUser: null,
+      loggedInUser: null
     };
     this.authservice = new AuthService();
     this.fetchUser();
@@ -22,90 +22,105 @@ export default class App extends Component {
 
   fetchUser() {
     return this.authservice
-    .loggedin()
-    .then(response => {
-      this.setState({
-        loggedInUser: response
+      .loggedin()
+      .then(response => {
+        this.setState({
+          loggedInUser: response
+        });
+      })
+      .catch(err => {
+        this.setState({
+          loggedInUser: false
+        });
       });
-    })
-    .catch(err => {
-      this.setState({
-        loggedInUser: false,
-      });
-    });
   }
 
   render() {
-    if(this.state.loggedInUser) {
+    if (this.state.loggedInUser) {
       return (
-        <React.Fragment>
-          <Header></Header>
-          <Switch>
-            <Route
-              extact
-              path="/home"
-              render={() => {
-                return <Home user={this.state.loggedInUser}></Home>;
-              }}
-            />
-            <Route
-              extact
-              path="/party"
-              render={() => {
-                return <Create user={this.state.loggedInUser} history={this.props.history}></Create>;
-              }}
-            />
-            <Route
-              extact
-              path="/"
-              render={() => {
-                return (
-                  <Link to="/home">
-                    <button><h2>Let's Sparty!</h2>
-                    </button>
-                  </Link>
-                );
-              }}
-            />
-          </Switch>
-          <Footer></Footer>
-        </React.Fragment>
+        <div className="App">
+          <div className="Container">
+            <Header></Header>
+            <Switch>
+              <Route
+                extact
+                path="/home"
+                render={() => {
+                  return <Home user={this.state.loggedInUser}></Home>;
+                }}
+              />
+              <Route
+                extact
+                path="/party"
+                render={() => {
+                  return (
+                    <Create
+                      user={this.state.loggedInUser}
+                      history={this.props.history}
+                    ></Create>
+                  );
+                }}
+              />
+              <Route
+                extact
+                path="/"
+                render={() => {
+                  return (
+                    <Link to="/home">
+                      <section className="Landing">
+                        <button className="SpartyButton">
+                          <h2>Let's Sparty!</h2>
+                        </button>
+                      </section>
+                    </Link>
+                  );
+                }}
+              />
+            </Switch>
+            <Footer></Footer>
+          </div>
+        </div>
       );
     } else {
       return (
-        <React.Fragment>
-          <Header></Header>
-          <Switch>
-            <Route
-              extact
-              path="/login"
-              render={() => {
-                return <Login></Login>;
-              }}
-            />
-            <Route
-              extact
-              path="/party/:id"
-              render={() => {
-                return <Party user={this.state.loggedInUser}></Party>;
-              }}
-            />
-            <Route
-              extact
-              path="/"
-              render={() => {
-                return (
-                  <Link to="/login">
-                    <button><h2>Let's Sparty!</h2>
-                    </button>
-                  </Link>
-                );
-              }}
-            />
-          </Switch>
-          <Footer></Footer>
-        </React.Fragment>
+        <div className="App">
+          <div className="Container">
+            <Header></Header>
+            <Switch>
+              <Route
+                extact
+                path="/login"
+                render={() => {
+                  return <Login></Login>;
+                }}
+              />
+              <Route
+                extact
+                path="/party/:id"
+                render={() => {
+                  return <Party user={this.state.loggedInUser}></Party>;
+                }}
+              />
+              <Route
+                extact
+                path="/"
+                render={() => {
+                  return (
+                    <Link to="/login">
+                      <section className="Landing">
+                        <button className="SpartyButton">
+                          <h2>Let's Sparty!</h2>
+                        </button>
+                      </section>
+                    </Link>
+                  );
+                }}
+              />
+            </Switch>
+            <Footer></Footer>
+          </div>
+        </div>
       );
-    }   
+    }
   }
 }

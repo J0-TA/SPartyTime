@@ -4,8 +4,8 @@ import "./Footer.scss";
 export default class Footer extends Component {
   render() {
     return (
-        <footer>
-          <p>Developed at Ironhack by Jota</p>
+        <footer className="Footer">
+          <p>Developed at Ironhack by <a href="https://www.linkedin.com/in/jcarlosmateo/">Jota</a></p>
         </footer>
     );
   }

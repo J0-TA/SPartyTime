@@ -6,8 +6,8 @@ export default class Header extends Component {
   render() {
     return (
       <Link to="/">
-        <header>
-          <h1>SParty</h1>
+        <header className="Header">
+          <h1>SPartyTime</h1>
         </header>
       </Link>
     );

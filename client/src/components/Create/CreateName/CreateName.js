@@ -18,8 +18,8 @@ export default class CreateName extends Component {
           placeholder="New Sparty"
         />
         <Link to="/party/event">
-          <button onClick={() => this.props.handleCreatePlaylist()}>
-            <h5 className="nextButton">Next</h5>
+          <button className="nextButton" onClick={() => this.props.handleCreatePlaylist()}>
+            <h5>Next</h5>
           </button>
         </Link>
       </section>

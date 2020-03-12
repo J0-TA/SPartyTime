@@ -18,10 +18,8 @@ export default class CreateEvent extends Component {
           type="text"
           placeholder="Portal, floor, door,..."
         />
-        <label htmlFor="hour">Party starts at:</label>
-        <input type="time" onChange={e => this.props.updateHour(e)}></input>
-          <button onClick={() => this.props.handleCreateParty()}>
-            <h5 className="nextButton">Create</h5>
+          <button className="nextButton" onClick={() => this.props.handleCreateParty()}>
+            <h5>Create</h5>
           </button>
       </section>
     );

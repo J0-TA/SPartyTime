@@ -23,16 +23,6 @@ const partySchema = new Schema({
         default: ""
     },
 
-    location: {
-        type: [Number],
-        default: null
-    },
-
-    hour: {
-        type: String,
-        default: ""
-    },
-
     user: {
         type: Schema.Types.ObjectId,
         ref: "User"

@@ -50,13 +50,6 @@ class Create extends Component {
     newState.party.addressDetails = e.target.value;
     this.setState(newState);
   }
-  updateHour(e) {
-    let newState = {
-      ...this.state
-    };
-    newState.party.hour = e.target.value;
-    this.setState(newState);
-  }
 
   createPlaylist() {
     let newState = {
@@ -118,7 +111,6 @@ class Create extends Component {
               <CreateEvent
                 updateAddress={e => this.updateAddress(e)}
                 updateAddressDetails={e => this.updateAddressDetails(e)}
-                updateHour={e => this.updateHour(e)}
                 party={this.state.party}
                 handleCreateParty={() => this.handleCreateParty()}
               ></CreateEvent>

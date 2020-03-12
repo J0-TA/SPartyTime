@@ -11,7 +11,7 @@ export default class Login extends Component {
 
   render() {
     return (
-      <section>
+      <section className="Login">
         <div>
           <a href={`${process.env.REACT_APP_API_URL}/auth/spotify`}>
             Log In with Spotify

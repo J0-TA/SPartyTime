@@ -52,7 +52,7 @@ export default class SpotifyService {
       "Authorization": "Bearer " + accessToken
     }
     this.service
-      .post(`https://api.spotify.com/v1/me/player/queue?uri=${song}`, {
+      .post(`me/player/queue?uri=${song}`, {
         headers: myHeaders
       })
       .then(response => response.data)

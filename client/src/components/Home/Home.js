@@ -46,20 +46,24 @@ export default class Home extends Component {
   }
 
   render() {
+    console.log(this.state)
     if (this.state.loggedInUser) {
       return (
         <section className="Home">
           <button className="Logout" onClick={() => this.logout()}>
-            Log Out <span>x</span>
+            Log Out x
           </button>
           <div className="dashboard">
             <div className="userInfo">
-              <h2> Welcome {this.state.loggedInUser.spotifyID}</h2>
+              <h2> Welcome, {this.state.loggedInUser.spotifyID.toUpperCase()}</h2>
               <img
                 src={this.state.loggedInUser.photo}
                 alt={this.state.loggedInUser.username}
               />
             </div>
+            {this.state.userParties.length !== 0 ? (
+                <p className="parties">Check your Sparties (Total: {this.state.userParties.length})</p>
+              ) : (<p className="parties">You haven't active Sparties</p>)}
             <div className="partiesSlider">
               {this.state.userParties.map((party, idx) => {
                 return (
@@ -68,7 +72,6 @@ export default class Home extends Component {
                       <img
                         src={party.image_url}
                         alt={party.name}
-                        height="100"
                       />
                       <h5>{party.name}</h5>
                     </div>

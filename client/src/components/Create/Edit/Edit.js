@@ -69,11 +69,6 @@ export default class Edit extends Component {
               placeholder={this.state.party.addressDetails}
               onChange={e => this.updateParty(e, "addressDetails")}
             />
-            <input
-              type="time"
-              placeholder={this.state.party.hour}
-              onChange={e => this.updateParty(e, "hour")}
-            />
             <button>
                 <h1 onClick={()=> this.saveChanges()}>Save changes</h1>
             </button>

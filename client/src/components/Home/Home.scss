@@ -1,0 +1,122 @@
+@import "../../styles/variables.scss";
+
+.Home {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  .Logout {
+    width: 100vw;
+    height: 3rem;
+    font-size: 1rem;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    position: fixed;
+    top: 6rem;
+    left: 0;
+
+    &:hover {
+      cursor: pointer;
+      color: #fd442c;
+    }
+  }
+  .dashboard {
+    margin-top: 10rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 50%;
+    margin-bottom: 2rem;
+
+    a {
+      text-decoration: none;
+    }
+
+    .userInfo {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 3rem;
+      height: 40%;
+      width: 90vw;
+      color: #ffffff;
+
+      img {
+        width: 100px;
+      }
+    }
+    .parties {
+      color: #ffffff;
+      margin: 1rem 0;
+    }
+    .partiesSlider {
+      width: 100vw;
+      height: 300px;
+      padding: 1rem 0rem;
+      display: flex;
+      overflow-y: hidden;
+    }
+    .partyIcon {
+      width: 80%;
+      height: 150px;
+      margin: 0 1rem;
+      padding: 0.5rem;
+      border: 1px solid #ffffff;
+      border-radius: 5px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      justify-content: center;
+      background-color: $darkblue;
+
+      &:hover{
+        border: 1px solid $primary
+      }
+
+      img {
+        width: 150px;
+        height: auto;
+        border-radius: 5px;
+        margin-bottom: 0.8rem;
+      }
+
+      h5 {
+        color: #ffffff;
+      }
+    }
+  }
+  .newSparty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    button {
+      background-image: linear-gradient(to bottom right, $primary, #fd442c);
+      padding: 2rem;
+      border: 1px solid $secundary;
+      border-radius: 5px;
+      font-size: 2rem;
+      color: #ffffff;
+      animation-name: create;
+      animation-duration: 3s;
+      animation-iteration-count: infinite;
+
+      &:hover {
+        cursor: pointer;
+        border: 1px solid #ffffff;
+      }
+    }
+    @keyframes create {
+      0% {
+        background-image: linear-gradient(to bottom right, $primary, #fd442c);
+      }
+      50% {
+        background-image: linear-gradient(to bottom right, #fd442c, $primary);
+      }
+      100% {
+        background-image: linear-gradient(to bottom right, $primary, #fd442c);
+      }
+    }
+  }
+}
