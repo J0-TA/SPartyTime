@@ -17,7 +17,7 @@ router.get(
   '/spotify/callback',
   passport.authenticate('spotify'),
   function (req, res) {
-    res.redirect(`/home`)
+    res.redirect(`https://spartytime.herokuapp.com/home`)
   },
 
 );
