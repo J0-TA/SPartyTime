@@ -37,7 +37,6 @@ export default class Edit extends Component {
     this.getPartyDetails();
   }
   render() {
-    console.log(this.state);
     if (this.state.party && this.state.loggedInUser) {
       if (this.state.loggedInUser._id === this.state.party.user) {
         return (

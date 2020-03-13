@@ -70,7 +70,6 @@ export default class Party extends Component {
   }
 
   render() {
-    console.log(this.state);
     if (this.state.party && this.state.loggedInUser) {
       if (this.state.loggedInUser._id === this.state.party.user) {
         return (

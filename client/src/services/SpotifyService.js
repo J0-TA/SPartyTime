@@ -29,8 +29,6 @@ export default class SpotifyService {
       .then(response => response.data)
   }
   addSongToPlaylist = (song, playlist, accessToken, user) => {
-    console.log(song)
-    console.log(playlist)
     const myHeaders = {
       "Authorization": "Bearer " + accessToken
     }
