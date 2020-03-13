@@ -3,7 +3,8 @@ import axios from "axios";
 export default class PartyService {
     constructor() {
         this.service = axios.create({
-            baseURL: `${process.env.REACT_APP_API_URL}/parties`,
+            baseURL: `https://spartytime.herokuapp.com/api/parties`,
+            withCredentials: true
         });
     }
     getAllParties = () => {

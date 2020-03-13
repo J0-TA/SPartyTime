@@ -8,7 +8,7 @@ passport.use(
   new SpotifyStrategy({
       clientID: process.env.SPOTIFY_CLIENT_ID,
       clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-      callbackURL: `/api/auth/spotify/callback`
+      callbackURL: `https://spartytime.herokuapp.com/api/auth/spotify/callback`
     },
     function (accessToken, refreshToken, expires_in, profile, done) {
       User.find({

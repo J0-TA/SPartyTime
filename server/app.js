@@ -78,9 +78,6 @@ hbs.registerHelper('ifUndefined', (value, options) => {
 });
 
 
-// default value for title local
-app.locals.title = 'Express - Generated with IronGenerator';
-
 app.use(session({
   secret: 'react shhh',
   resave: false,
