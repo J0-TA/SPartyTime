@@ -5,7 +5,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  flex:1;
+  flex: 1;
   nav {
     height: 3rem;
     display: flex;
@@ -33,13 +33,12 @@
     }
   }
   .spartyName {
-      font-size: 2rem;
-      margin: 1rem;
-      padding: 0.8rem 1rem;
-      background-image: linear-gradient(to bottom right, $primary, #fd442c);
-      border-radius: 5px;
-      color: #ffffff;
-    
+    font-size: 2rem;
+    margin: 1rem;
+    padding: 0.8rem 1rem;
+    background-image: linear-gradient(to bottom right, $primary, #fd442c);
+    border-radius: 5px;
+    color: #ffffff;
   }
   .spartyDetails {
     color: #ffffff;
@@ -59,12 +58,16 @@
     justify-content: space-around;
     align-items: center;
     width: 100%;
+    margin-bottom: 1rem;
     .spotifyButton {
       display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100px;
       background-color: $spotify;
-      padding: 1rem;
+      padding: 0.5rem;
       color: #ffffff;
-      margin: 0rem 1rem 1rem 1rem;
+      margin: 1rem;
       border-radius: 50px;
       border: 1px solid $secundary;
       text-align: center;
@@ -79,7 +82,7 @@
     justify-content: space-around;
     align-items: baseline;
     width: 100%;
-    
+
     input {
       padding: 0.5rem 1rem;
       width: 70%;
@@ -116,7 +119,7 @@
     height: 250px;
     display: flex;
     overflow-y: hidden;
-    .addedSong{
+    .addedSong {
       display: flex;
       width: 100%;
       justify-content: center;
@@ -191,13 +194,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 1rem;
+    background-image: linear-gradient(to bottom right, $primary, #fd442c);
+    padding: 0.5rem;
+    border-radius: 5px;
+    color: #ffffff;
 
     a {
+      display: flex;
+      width: 15px;
       font-size: 1.1rem;
       color: #ffffff;
       padding: 0.5rem;
       border-radius: 10px;
-      margin-bottom: 1rem;
     }
     .whatsapp {
       background-color: #6dd468;

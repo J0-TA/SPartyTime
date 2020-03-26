@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import { faSpotify } from "@fortawesome/free-brands-svg-icons";
-import { faMarker } from "@fortawesome/free-solid-svg-icons";
+import { faMapMarker } from "@fortawesome/free-solid-svg-icons";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { faShareAlt } from "@fortawesome/free-solid-svg-icons";
@@ -103,7 +103,7 @@ export default class Party extends Component {
               }
               className="spartyDetails"
             >
-              <FontAwesomeIcon className="icon" icon={faMarker} size="1x" />:{" "}
+              <FontAwesomeIcon className="icon" icon={faMapMarker} size="1x" />:{" "}
               <span>
                 {this.state.party.address}. {this.state.party.addressDetails}.
               </span>
@@ -208,7 +208,7 @@ export default class Party extends Component {
             }
             className="spartyDetails"
           >
-            <FontAwesomeIcon className="icon" icon={faMarker} size="1x" />:{" "}
+            <FontAwesomeIcon className="icon" icon={faMapMarker} size="1x" />:{" "}
             <span>
               {this.state.party.address}. {this.state.party.addressDetails}.
             </span>
