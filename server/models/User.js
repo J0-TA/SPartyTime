@@ -5,7 +5,10 @@ const userSchema = new Schema({
   spotifyID: String,
   token: String,
   refreshToken: String,
-  photo: String,
+  photo: {
+    type: String,
+    default: `../images/noPhoto.jpeg`
+  },
   product: String,
   spotifyUri: String,
 }, {

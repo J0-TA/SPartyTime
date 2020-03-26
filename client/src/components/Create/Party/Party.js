@@ -7,6 +7,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import { faSpotify } from "@fortawesome/free-brands-svg-icons";
+import { faMarker } from "@fortawesome/free-solid-svg-icons";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { faShareAlt } from "@fortawesome/free-solid-svg-icons";
 
 export default class Party extends Component {
   constructor(props) {
@@ -61,8 +65,6 @@ export default class Party extends Component {
 
     this.setState(newState);
     document.querySelector("input").value = "";
-
-    
   }
 
   componentDidMount() {
@@ -80,6 +82,7 @@ export default class Party extends Component {
               </button>
               <button className="no-bg">
                 <Link to={"/party/" + this.state.party._id + "/edit"}>
+                  <FontAwesomeIcon className="icon" icon={faEdit} size="1x" />
                   Edit
                 </Link>
               </button>
@@ -87,13 +90,11 @@ export default class Party extends Component {
                 className="no-bg delete"
                 onClick={() => this.props.deleteParty(this.state.partyID)}
               >
+                <FontAwesomeIcon className="icon" icon={faTrashAlt} size="1x" />
                 Delete
               </button>
             </nav>
-            <p className="spartyName">
-              <h1>Sparty</h1>
-              <h2>{this.state.party.name}</h2>
-            </p>
+            <h1 className="spartyName">{this.state.party.name}</h1>
             <a
               target="_blank"
               rel="noopener noreferrer"
@@ -102,7 +103,7 @@ export default class Party extends Component {
               }
               className="spartyDetails"
             >
-              Google Maps:{" "}
+              <FontAwesomeIcon className="icon" icon={faMarker} size="1x" />:{" "}
               <span>
                 {this.state.party.address}. {this.state.party.addressDetails}.
               </span>
@@ -113,9 +114,11 @@ export default class Party extends Component {
                 href={"spotify:playlist:" + this.state.party.playlist}
               >
                 <FontAwesomeIcon className="icon" icon={faSpotify} size="1x" />
-                Check the playlist on Spotify
+                Check playlist
               </a>
               <div className="socialShare">
+                <h2>Share: </h2>
+                <FontAwesomeIcon className="icon" icon={faShareAlt} size="1x" />
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
@@ -130,7 +133,6 @@ export default class Party extends Component {
                     icon={faWhatsapp}
                     size="1x"
                   />
-                  Share via Whatsapp
                 </a>
                 <a
                   target="_blank"
@@ -146,16 +148,14 @@ export default class Party extends Component {
                     icon={faFacebook}
                     size="1x"
                   />
-                  Share via facebook
                 </a>
               </div>
             </div>
             <div className="searchContainer">
-              <label htmlFor="search">Add next song:</label>
               <input
                 className="spotiSearch"
                 type="search"
-                placeholder="Search..."
+                placeholder="Find the next song"
                 onChange={e => this.searchSongs(e)}
               />
               <p>
@@ -176,18 +176,13 @@ export default class Party extends Component {
                         src={song.album.images[1].url}
                         alt={song.album.name}
                       />
-                      <div className="songName">
-                        <h3>{song.name}</h3>
-                        <h4>{song.artists[0].name}</h4>
-                      </div>
-                    </div>
-                    <div className="actions">
-                      <audio controls>
-                        <source src={song.preview_url}></source>
-                      </audio>
                       <button onClick={() => this.addSong(song.uri)}>
                         Add to Sparty
                       </button>
+                    </div>
+                    <div className="songName">
+                      <h3>{song.name}</h3>
+                      <h4>{song.artists[0].name}</h4>
                     </div>
                   </div>
                 );
@@ -204,10 +199,7 @@ export default class Party extends Component {
               <Link to="/login">Login</Link>
             </button>
           </nav>
-          <p className="spartyName">
-            <h1>Sparty</h1>
-            <h2>{this.state.party.name}</h2>
-          </p>
+          <h1 className="spartyName">{this.state.party.name}</h1>
           <a
             target="_blank"
             rel="noopener noreferrer"
@@ -216,7 +208,7 @@ export default class Party extends Component {
             }
             className="spartyDetails"
           >
-            Google Maps:{" "}
+            <FontAwesomeIcon className="icon" icon={faMarker} size="1x" />:{" "}
             <span>
               {this.state.party.address}. {this.state.party.addressDetails}.
             </span>
@@ -227,15 +219,14 @@ export default class Party extends Component {
               href={"spotify:playlist:" + this.state.party.playlist}
             >
               <FontAwesomeIcon className="icon" icon={faSpotify} size="1x" />
-              Check the playlist on Spotify
+              Check playlist
             </a>
           </div>
           <div className="searchContainer">
-            <label htmlFor="search">Add next song:</label>
             <input
               className="spotiSearch"
               type="search"
-              placeholder="Search..."
+              placeholder="Find the next song"
               onChange={e => this.searchSongs(e)}
             />
             <p>
@@ -251,21 +242,19 @@ export default class Party extends Component {
             {this.state.foundedSongs.map((song, idx) => {
               return (
                 <div className="resultCard" key={idx}>
-                  <div className="songInfo">
-                    <img src={song.album.images[1].url} alt={song.album.name} />
+                <div className="songInfo">
+                      <img
+                        src={song.album.images[1].url}
+                        alt={song.album.name}
+                      />
+                      <button onClick={() => this.addSong(song.uri)}>
+                        Add to Sparty
+                      </button>
+                    </div>
                     <div className="songName">
                       <h3>{song.name}</h3>
                       <h4>{song.artists[0].name}</h4>
                     </div>
-                  </div>
-                  <div className="actions">
-                    <audio controls>
-                      <source src={song.preview_url}></source>
-                    </audio>
-                    <button onClick={() => this.addSong(song.uri)}>
-                      Add to Sparty
-                    </button>
-                  </div>
                 </div>
               );
             })}

@@ -11,7 +11,6 @@ const partySchema = new Schema({
     image_url: {
         type: String,
         default: `../images/default${randomInt(1,4)}.jpg`
-        //`https://source.unsplash.com/random?music-party`
     },
     address: {
         type: String,
