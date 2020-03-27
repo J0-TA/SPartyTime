@@ -105,7 +105,7 @@ export default class Party extends Component {
               }
               className="spartyDetails"
             >
-              <FontAwesomeIcon className="icon" icon={faMapMarker} size="1x" />:{" "}
+              <FontAwesomeIcon className="icon" icon={faMapMarker} size="1x" />{" "}:{" "}
               <span>
                 {this.state.party.address}. {this.state.party.addressDetails}.
               </span>
@@ -116,10 +116,9 @@ export default class Party extends Component {
                 href={"spotify:playlist:" + this.state.party.playlist}
               >
                 <FontAwesomeIcon className="icon" icon={faSpotify} size="2x" />
-                Check playlist
+                Check
               </a>
               <div className="socialShare">
-                <h2>Share </h2>
                 <FontAwesomeIcon className="icon" icon={faShareAlt} size="1x" />
                 <a
                   target="_blank"
@@ -220,7 +219,7 @@ export default class Party extends Component {
               href={"spotify:playlist:" + this.state.party.playlist}
             >
               <FontAwesomeIcon className="icon" icon={faSpotify} size="1x" />
-              Check playlist
+              Check
             </a>
           </div>
           <div className="searchContainer">
