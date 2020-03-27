@@ -33,12 +33,22 @@
     }
   }
   .spartyName {
-    font-size: 2rem;
-    margin: 1rem;
-    padding: 0.8rem 1rem;
-    background-image: linear-gradient(to bottom right, $primary, #fd442c);
-    border-radius: 5px;
-    color: #ffffff;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h1 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-size: 2rem;
+      margin: 1rem;
+      padding: 0.8rem 1rem;
+      background-image: linear-gradient(to bottom right, $primary, #fd442c);
+      border-radius: 5px;
+      color: #ffffff;
+    }
   }
   .spartyDetails {
     color: #ffffff;
@@ -58,7 +68,7 @@
     justify-content: space-around;
     align-items: center;
     width: 100%;
-    margin-bottom: 1rem;
+    margin: 0 1rem 1rem 1rem;
     .spotifyButton {
       display: flex;
       justify-content: center;
@@ -67,7 +77,6 @@
       background-color: $spotify;
       padding: 0.5rem;
       color: #ffffff;
-      margin: 1rem;
       border-radius: 50px;
       border: 1px solid $secundary;
       text-align: center;
@@ -76,12 +85,49 @@
         border: 1px solid #ffffff;
       }
     }
+    .icon {
+      margin-right: 1rem;
+    }
+    .socialShare {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-image: linear-gradient(to bottom right, $primary, #fd442c);
+      padding: 0.5rem;
+      border-radius: 5px;
+      color: #ffffff;
+
+      a {
+        display: flex;
+        width: 15px;
+        font-size: 1.1rem;
+        color: #ffffff;
+        padding: 0.5rem;
+        border-radius: 10px;
+        margin: auto 0.5rem;
+      }
+      .whatsapp {
+        background-color: #6dd468;
+        border: 1px solid $secundary;
+        &:hover {
+          border: 1px solid #ffffff;
+        }
+      }
+      .facebook {
+        background-color: #3b5998;
+        border: 1px solid $secundary;
+        &:hover {
+          border: 1px solid #ffffff;
+        }
+      }
+    }
   }
   .searchContainer {
     display: flex;
     justify-content: space-around;
     align-items: baseline;
     width: 100%;
+    margin: 0 1rem;
 
     input {
       padding: 0.5rem 1rem;
@@ -95,6 +141,8 @@
       margin-bottom: 1rem;
       &::placeholder {
         color: #ffffff;
+      }
+      &:hover {
         border: 1px solid #ffffff;
       }
       &:focus {
@@ -116,7 +164,7 @@
 
   .searchResults {
     width: 100%;
-    height: 250px;
+    height: 180px;
     display: flex;
     overflow-y: hidden;
     .addedSong {
@@ -135,7 +183,7 @@
   }
   .resultCard {
     width: auto;
-    height: 200px;
+    height: 140px;
     margin: 0 1rem;
     padding: 1rem;
     border: 1px solid #ffffff;
@@ -156,71 +204,33 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      width: 300px;
+      width: 100%;
+      height: 60%;
+      margin-bottom: 1rem;
     }
     .songName {
       display: flex;
       flex-direction: column;
       width: 100%;
-      font-size: 1.5rem;
-      h3 {
-        margin-bottom: 1rem;
-      }
-      h4 {
-        color: $primary;
-      }
+      font-size: 1.2rem;
     }
-
-    img {
-      width: 150px;
-      height: auto;
-      border-radius: 5px;
-      margin-bottom: 1rem;
-    }
-
-    button {
-      font-size: 1rem;
-      margin: 1rem;
-      padding: 1rem 1rem;
-      background-image: linear-gradient(to bottom right, $primary, #fd442c);
-      border-radius: 5px;
-      color: #ffffff;
+    h4 {
+      color: $primary;
     }
   }
-  .icon {
-    margin-right: 1rem;
-  }
-  .socialShare {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 1rem;
-    background-image: linear-gradient(to bottom right, $primary, #fd442c);
-    padding: 0.5rem;
+
+  img {
+    width: 85px;
+    height: 85px;
     border-radius: 5px;
-    color: #ffffff;
+  }
 
-    a {
-      display: flex;
-      width: 15px;
-      font-size: 1.1rem;
-      color: #ffffff;
-      padding: 0.5rem;
-      border-radius: 10px;
-    }
-    .whatsapp {
-      background-color: #6dd468;
-      border: 1px solid $secundary;
-      &:hover {
-        border: 1px solid #ffffff;
-      }
-    }
-    .facebook {
-      background-color: #3b5998;
-      border: 1px solid $secundary;
-      &:hover {
-        border: 1px solid #ffffff;
-      }
-    }
+  button {
+    font-size: 2rem;
+    background-image: linear-gradient(to bottom right, $primary, #fd442c);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    color: #ffffff;
   }
 }

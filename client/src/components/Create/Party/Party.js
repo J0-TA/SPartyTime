@@ -94,7 +94,9 @@ export default class Party extends Component {
                 Delete
               </button>
             </nav>
-            <h1 className="spartyName">{this.state.party.name}</h1>
+            <div className="spartyName">
+              <h1>{this.state.party.name}</h1>
+            </div>
             <a
               target="_blank"
               rel="noopener noreferrer"
@@ -113,11 +115,11 @@ export default class Party extends Component {
                 className="spotifyButton"
                 href={"spotify:playlist:" + this.state.party.playlist}
               >
-                <FontAwesomeIcon className="icon" icon={faSpotify} size="1x" />
+                <FontAwesomeIcon className="icon" icon={faSpotify} size="2x" />
                 Check playlist
               </a>
               <div className="socialShare">
-                <h2>Share: </h2>
+                <h2>Share </h2>
                 <FontAwesomeIcon className="icon" icon={faShareAlt} size="1x" />
                 <a
                   target="_blank"
@@ -176,13 +178,12 @@ export default class Party extends Component {
                         src={song.album.images[1].url}
                         alt={song.album.name}
                       />
-                      <button onClick={() => this.addSong(song.uri)}>
-                        Add to Sparty
-                      </button>
+                      <button onClick={() => this.addSong(song.uri)}>✚</button>
                     </div>
                     <div className="songName">
-                      <h3>{song.name}</h3>
-                      <h4>{song.artists[0].name}</h4>
+                    <h3>{song.name}<span>{" "}-{" "}
+                    <h4>{song.artists[0].name}</h4>
+                    </span></h3>
                     </div>
                   </div>
                 );
@@ -242,19 +243,15 @@ export default class Party extends Component {
             {this.state.foundedSongs.map((song, idx) => {
               return (
                 <div className="resultCard" key={idx}>
-                <div className="songInfo">
-                      <img
-                        src={song.album.images[1].url}
-                        alt={song.album.name}
-                      />
-                      <button onClick={() => this.addSong(song.uri)}>
-                        Add to Sparty
-                      </button>
-                    </div>
-                    <div className="songName">
-                      <h3>{song.name}</h3>
-                      <h4>{song.artists[0].name}</h4>
-                    </div>
+                  <div className="songInfo">
+                    <img src={song.album.images[1].url} alt={song.album.name} />
+                    <button onClick={() => this.addSong(song.uri)}>✚</button>
+                  </div>
+                  <div className="songName">
+                    <h3>{song.name}<span>{" "}-{" "}
+                    <h4>{song.artists[0].name}</h4>
+                    </span></h3>
+                  </div>
                 </div>
               );
             })}
