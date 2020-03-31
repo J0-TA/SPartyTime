@@ -172,18 +172,25 @@ export default class Party extends Component {
               )}
               {this.state.foundedSongs.map((song, idx) => {
                 return (
-                  <div className="resultCard" key={idx}>
-                    <button onClick={() => this.addSong(song.uri)}>
-                      <img
-                        src={song.album.images[1].url}
-                        alt={song.album.name}
-                      />
-                      <div className="songName">
-                        <h3>{song.name.length > 120 ? song.name.substring(0, 119)+ "..." : song.name}</h3>
-                        <h4>{song.artists[0].name.length > 120 ? song.artists[0].name.substring(0, 119) + "..." : song.artists[0]}</h4>
-                      </div>
-                    </button>
-                  </div>
+                  <button
+                    className="resultCard"
+                    key={idx}
+                    onClick={() => this.addSong(song.uri)}
+                  >
+                    <img src={song.album.images[1].url} alt={song.album.name} />
+                    <div className="songName">
+                      <h3>
+                        {song.name.length > 120
+                          ? song.name.substring(0, 119) + "..."
+                          : song.name}
+                      </h3>
+                      <h4>
+                        {song.artists[0].name.length > 120
+                          ? song.artists[0].name.substring(0, 119) + "..."
+                          : song.artists[0]}
+                      </h4>
+                    </div>
+                  </button>
                 );
               })}
             </div>
