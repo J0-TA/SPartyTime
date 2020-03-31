@@ -180,14 +180,14 @@ export default class Party extends Component {
                     <img src={song.album.images[1].url} alt={song.album.name} />
                     <div className="songName">
                       <h3>
-                        {song.name.length > 120
-                          ? song.name.substring(0, 119) + "..."
+                        {song.name.length > 60
+                          ? song.name.substring(0, 59) + "..."
                           : song.name}
                       </h3>
                       <h4>
-                        {song.artists[0].name.length > 120
-                          ? song.artists[0].name.substring(0, 119) + "..."
-                          : song.artists[0]}
+                        {song.artists[0].name.length > 40
+                          ? song.artists[0].name.substring(0, 39) + "..."
+                          : song.artists[0].name}
                       </h4>
                     </div>
                   </button>
