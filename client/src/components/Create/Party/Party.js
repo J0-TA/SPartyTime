@@ -105,7 +105,8 @@ export default class Party extends Component {
               }
               className="spartyDetails"
             >
-              <FontAwesomeIcon className="icon" icon={faMapMarker} size="1x" />{" "}:{" "}
+              <FontAwesomeIcon className="icon" icon={faMapMarker} size="1x" />{" "}
+              :{" "}
               <span>
                 {this.state.party.address}. {this.state.party.addressDetails}.
               </span>
@@ -172,18 +173,16 @@ export default class Party extends Component {
               {this.state.foundedSongs.map((song, idx) => {
                 return (
                   <div className="resultCard" key={idx}>
-                    <div className="songInfo">
+                    <button onClick={() => this.addSong(song.uri)}>
                       <img
                         src={song.album.images[1].url}
                         alt={song.album.name}
                       />
-                      <button onClick={() => this.addSong(song.uri)}>✚</button>
-                    </div>
-                    <div className="songName">
-                    <h3>{song.name}<span>{" "}-{" "}
-                    <h4>{song.artists[0].name}</h4>
-                    </span></h3>
-                    </div>
+                      <div className="songName">
+                        <h3>{song.name.length > 120 ? song.name.splice(119).push("...") : song.name}</h3>
+                        <h4>{song.artists[0].name.length > 120 ? song.artists[0].name.splice(119).push("...") : song.artists[0]}</h4>
+                      </div>
+                    </button>
                   </div>
                 );
               })}
@@ -247,9 +246,13 @@ export default class Party extends Component {
                     <button onClick={() => this.addSong(song.uri)}>✚</button>
                   </div>
                   <div className="songName">
-                    <h3>{song.name}<span>{" "}-{" "}
-                    <h4>{song.artists[0].name}</h4>
-                    </span></h3>
+                    <h3>
+                      {song.name}
+                      <span>
+                        {" "}
+                        - <h4>{song.artists[0].name}</h4>
+                      </span>
+                    </h3>
                   </div>
                 </div>
               );
