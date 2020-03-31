@@ -179,8 +179,8 @@ export default class Party extends Component {
                         alt={song.album.name}
                       />
                       <div className="songName">
-                        <h3>{song.name.length > 120 ? song.name.splice(119).push("...") : song.name}</h3>
-                        <h4>{song.artists[0].name.length > 120 ? song.artists[0].name.splice(119).push("...") : song.artists[0]}</h4>
+                        <h3>{song.name.length > 120 ? song.name.substring(0, 119)+ "..." : song.name}</h3>
+                        <h4>{song.artists[0].name.length > 120 ? song.artists[0].name.substring(0, 119) + "..." : song.artists[0]}</h4>
                       </div>
                     </button>
                   </div>
