@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import PartyService from "../../../services/PartyService";
 import { Link } from "react-router-dom";
 import "./Edit.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
 export default class Edit extends Component {
   constructor(props) {
@@ -49,6 +51,7 @@ export default class Edit extends Component {
                 className="no-bg"
                 onClick={() => this.props.deleteParty(this.state.partyID)}
               >
+                <FontAwesomeIcon className="icon" icon={faTrashAlt} size="1x" />
                 Delete
               </button>
             </nav>

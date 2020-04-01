@@ -48,41 +48,17 @@ export default class Home extends Component {
   render() {
     if (this.state.loggedInUser) {
       return (
-        <React.Fragment>
+        <section className="Home">
           <button className="Logout" onClick={() => this.logout()}>
             Log Out x
           </button>
-          <section className="Home">
-            <div className="dashboard">
-              <div className="userInfo">
-                <h2>
-                  {" "}
-                  Welcome, {this.state.loggedInUser.spotifyID.toUpperCase()}
-                </h2>
-                <img
-                  src={this.state.loggedInUser.photo}
-                  alt={this.state.loggedInUser.username}
-                />
-              </div>
-              {this.state.userParties.length !== 0 ? (
-                <p className="parties">
-                  Check your Sparties (Total: {this.state.userParties.length})
-                </p>
-              ) : (
-                <p className="parties">You haven't active Sparties</p>
-              )}
-              <div className="partiesSlider">
-                {this.state.userParties.map((party, idx) => {
-                  return (
-                    <Link to={"/party/" + party._id} key={idx}>
-                      <div className="partyIcon">
-                        <img src={party.image_url} alt={party.name} />
-                        <h5>{party.name}</h5>
-                      </div>
-                    </Link>
-                  );
-                })}
-              </div>
+          <div className="user">
+            <div className="userInfo">
+              <img
+                src={this.state.loggedInUser.photo}
+                alt={this.state.loggedInUser.username}
+              />
+              <h2>{this.state.loggedInUser.spotifyID.toUpperCase()}</h2>
             </div>
             <div className="newSparty">
               <Link to="/party/name">
@@ -91,8 +67,29 @@ export default class Home extends Component {
                 </button>
               </Link>
             </div>
-          </section>
-        </React.Fragment>
+          </div>
+          <div className="parties">
+          {this.state.userParties.length !== 0 ? (
+              <p>
+                Check your Sparties (Total: {this.state.userParties.length})
+              </p>
+            ) : (
+              <p>You haven't active Sparties</p>
+            )}
+            <div className="partiesSlider">
+              {this.state.userParties.map((party, idx) => {
+                return (
+                  <Link to={"/party/" + party._id} key={idx}>
+                    <div className="partyIcon">
+                      <h5>{party.name}</h5>
+                      <img src={party.image_url} alt={party.name} />
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
       );
     } else {
       return <Redirect to="/" />;
