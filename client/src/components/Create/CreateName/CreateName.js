@@ -18,7 +18,13 @@ export default class CreateName extends Component {
           onChange={e => this.props.updateName(e)}
           type="text"
           placeholder="New Sparty"
+          maxLength="25"
         />
+        <p className="length">
+        {this.props.party.name
+        ? this.props.party.name.length
+        : 0}
+        /25</p>
         <Link to="/party/event">
           <button
             className="nextButton"

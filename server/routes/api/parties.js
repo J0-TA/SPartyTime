@@ -10,7 +10,7 @@ router.post('/create', (req, res) => {
 
 router.get("/all", (req, res, next) => {
     Party.find()
-      .sort({createdAt: -1})
+      .sort({createdAt: 1})
       .then(allParties => res.json(allParties));
   });
   

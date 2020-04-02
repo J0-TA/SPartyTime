@@ -40,7 +40,8 @@
     color: #ffffff;
     background-image: linear-gradient(to bottom right, $primary, #fd442c);
     box-shadow: none;
-    margin-bottom: 2rem;
+    margin-bottom: .5rem;
+
 
     &::placeholder {
       color: #ffffff;
@@ -49,6 +50,11 @@
       outline: none;
       border: 1px solid white;
     }
+  }
+
+  .length {
+    color: #ffffff;
+    margin-bottom: 2rem;
   }
 
   a {

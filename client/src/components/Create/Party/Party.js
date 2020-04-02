@@ -26,13 +26,23 @@ export default class Party extends Component {
     this.partyService = new PartyService();
     this.spotifyService = new SpotifyService();
   }
-
   getPartyDetails() {
     this.partyService
       .getPartyDetails(this.state.partyID)
       .then(foundedParty =>
         this.setState({ ...this.state, party: foundedParty })
       );
+  }
+
+  getPartyDetailsNUpdate() {
+    this.partyService.getPartyDetails(this.state.partyID).then(foundedParty => {
+      foundedParty.userToken = this.state.loggedInUser.token;
+      this.partyService
+        .updateParty(foundedParty._id, foundedParty)
+        .then(updatedParty =>
+          this.setState({ ...this.state, party: updatedParty })
+        );
+    });
   }
 
   searchSongs(e) {
@@ -68,7 +78,9 @@ export default class Party extends Component {
   }
 
   componentDidMount() {
-    this.getPartyDetails();
+    this.state.loggedInUser
+    ? this.getPartyDetailsNUpdate()
+    : this.getPartyDetails();
   }
 
   render() {
@@ -125,7 +137,7 @@ export default class Party extends Component {
                   rel="noopener noreferrer"
                   className="whatsapp"
                   href={
-                    "https://web.whatsapp.com/send?text=Click to Sparty! " +
+                    "whatsapp://send?text=Click to Sparty! " +
                     encodeURI(window.location.href)
                   }
                 >
@@ -204,7 +216,9 @@ export default class Party extends Component {
               <Link to="/login">Login</Link>
             </button>
           </nav>
-          <h1 className="spartyName">{this.state.party.name}</h1>
+          <div className="spartyName">
+            <h1>{this.state.party.name}</h1>
+          </div>
           <a
             target="_blank"
             rel="noopener noreferrer"
@@ -247,24 +261,24 @@ export default class Party extends Component {
             {this.state.foundedSongs.map((song, idx) => {
               return (
                 <button
-                    className="resultCard"
-                    key={idx}
-                    onClick={() => this.addSong(song.uri)}
-                  >
-                    <img src={song.album.images[1].url} alt={song.album.name} />
-                    <div className="songName">
-                      <h3>
-                        {song.name.length > 60
-                          ? song.name.substring(0, 59) + "..."
-                          : song.name}
-                      </h3>
-                      <h4>
-                        {song.artists[0].name.length > 40
-                          ? song.artists[0].name.substring(0, 39) + "..."
-                          : song.artists[0].name}
-                      </h4>
-                    </div>
-                  </button>
+                  className="resultCard"
+                  key={idx}
+                  onClick={() => this.addSong(song.uri)}
+                >
+                  <img src={song.album.images[1].url} alt={song.album.name} />
+                  <div className="songName">
+                    <h3>
+                      {song.name.length > 60
+                        ? song.name.substring(0, 59) + "..."
+                        : song.name}
+                    </h3>
+                    <h4>
+                      {song.artists[0].name.length > 40
+                        ? song.artists[0].name.substring(0, 39) + "..."
+                        : song.artists[0].name}
+                    </h4>
+                  </div>
+                </button>
               );
             })}
           </div>

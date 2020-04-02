@@ -77,7 +77,7 @@ export default class Home extends Component {
               <p>You haven't active Sparties</p>
             )}
             <div className="partiesSlider">
-              {this.state.userParties.map((party, idx) => {
+              {this.state.userParties.reverse().map((party, idx) => {
                 return (
                   <Link to={"/party/" + party._id} key={idx}>
                     <div className="partyIcon">

@@ -61,7 +61,12 @@ export default class Edit extends Component {
                 type="text"
                 placeholder={this.state.party.name}
                 onChange={e => this.updateParty(e, "name")}
+                maxLength="25"
               />
+              <p className="length">
+                {this.state.party.name ? this.state.party.name.length : 0}
+                /25
+              </p>
               <label>Address</label>
               <input
                 type="text"
