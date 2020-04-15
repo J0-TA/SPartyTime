@@ -27,11 +27,11 @@ export default class Party extends Component {
     this.spotifyService = new SpotifyService();
   }
   getPartyDetails() {
-    this.partyService
-      .getPartyDetails(this.state.partyID)
-      .then(foundedParty =>
-        this.setState({ ...this.state, party: foundedParty })
-      );
+    this.partyService.getPartyDetails(this.state.partyID).then(foundedParty => {
+      if (this.state.loggedInUser) {
+        if (this.state.loggedInUser._id === foundedParty.user) this.getPartyDetailsNUpdate();
+      } else this.setState({ ...this.state, party: foundedParty });
+    });
   }
 
   getPartyDetailsNUpdate() {
@@ -79,11 +79,12 @@ export default class Party extends Component {
 
   componentDidMount() {
     this.state.loggedInUser
-    ? this.getPartyDetailsNUpdate()
-    : this.getPartyDetails();
+      ? this.getPartyDetailsNUpdate()
+      : this.getPartyDetails();
   }
 
   render() {
+    console.log(this.state);
     if (this.state.party && this.state.loggedInUser) {
       if (this.state.loggedInUser._id === this.state.party.user) {
         return (
