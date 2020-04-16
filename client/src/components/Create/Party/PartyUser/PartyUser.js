@@ -20,40 +20,31 @@ export default class Party extends Component {
       loggedInUser: this.props.user,
       partyID: window.location.href.split("party/")[1],
       foundedSongs: [],
-      addedSong: false,
+      addedSong: false
     };
 
     this.partyService = new PartyService();
     this.spotifyService = new SpotifyService();
   }
   getPartyDetails() {
-    this.partyService
-      .getPartyDetails(this.state.partyID)
-      .then((foundedParty) => {
-        if (this.state.loggedInUser) {
-          console.log("holi, voy a entrar en el if de actualizar");
-          if (this.state.loggedInUser._id === foundedParty.user)
-            this.getPartyDetailsNUpdate();
-          else this.setState({ ...this.state, party: foundedParty });
-        } else {
-          console.log("voy a meter la party en el state");
-          this.setState({ ...this.state, party: foundedParty });
-        }
-      });
+    this.partyService.getPartyDetails(this.state.partyID).then(foundedParty => {
+      if (this.state.loggedInUser) {
+        console.log('holi, voy a entrar en el if de actualizar')
+        if (this.state.loggedInUser._id === foundedParty.user) this.getPartyDetailsNUpdate();
+      } else this.setState({ ...this.state, party: foundedParty });
+    });
   }
 
   getPartyDetailsNUpdate() {
-    console.log("holi, voy a actualizar el token");
-    this.partyService
-      .getPartyDetails(this.state.partyID)
-      .then((foundedParty) => {
-        foundedParty.userToken = this.state.loggedInUser.token;
-        this.partyService
-          .updateParty(foundedParty._id, foundedParty)
-          .then((updatedParty) =>
-            this.setState({ ...this.state, party: updatedParty })
-          );
-      });
+    console.log('holi, voy a actualizar el token')
+    this.partyService.getPartyDetails(this.state.partyID).then(foundedParty => {
+      foundedParty.userToken = this.state.loggedInUser.token;
+      this.partyService
+        .updateParty(foundedParty._id, foundedParty)
+        .then(updatedParty =>
+          this.setState({ ...this.state, party: updatedParty })
+        );
+    });
   }
 
   searchSongs(e) {
@@ -61,11 +52,11 @@ export default class Party extends Component {
       return this.setState({ ...this.state, foundedSongs: [] });
     this.spotifyService
       .searchSongs(e.target.value, this.state.party.userToken)
-      .then((foundedSongs) =>
+      .then(foundedSongs =>
         this.setState({
           ...this.state,
           foundedSongs: foundedSongs.tracks.items,
-          addedSong: false,
+          addedSong: false
         })
       );
   }
@@ -79,7 +70,7 @@ export default class Party extends Component {
       this.state.party.user
     );
     let newState = {
-      ...this.state,
+      ...this.state
     };
     newState.addedSong = true;
     newState.foundedSongs = [];
@@ -89,12 +80,15 @@ export default class Party extends Component {
   }
 
   componentDidMount() {
-    this.getPartyDetails();
+    this.state.loggedInUser
+      ? this.getPartyDetailsNUpdate()
+      : this.getPartyDetails();
   }
 
   render() {
     console.log(this.state);
-    if (this.state.party && this.state.loggedInUser && this.state.loggedInUser._id === this.state.party.user) {
+    if (this.state.party && this.state.loggedInUser) {
+      if (this.state.loggedInUser._id === this.state.party.user) {
         return (
           <section className="Party">
             <nav>
@@ -178,7 +172,7 @@ export default class Party extends Component {
                 className="spotiSearch"
                 type="search"
                 placeholder="Find the next song"
-                onChange={(e) => this.searchSongs(e)}
+                onChange={e => this.searchSongs(e)}
               />
               <p>
                 Matchs: <span>{this.state.foundedSongs.length}</span>
@@ -216,7 +210,8 @@ export default class Party extends Component {
             </div>
           </section>
         );
-      } else if (this.state.party) {
+      }
+    } else if (this.state.party) {
       return (
         <section className="Party">
           <nav>
@@ -254,7 +249,7 @@ export default class Party extends Component {
               className="spotiSearch"
               type="search"
               placeholder="Find the next song"
-              onChange={(e) => this.searchSongs(e)}
+              onChange={e => this.searchSongs(e)}
             />
             <p>
               Matchs: <span>{this.state.foundedSongs.length}</span>
