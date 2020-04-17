@@ -171,6 +171,8 @@
     flex-grow: inherit;
     flex-direction: column;
     overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+
     .addedSong {
       display: flex;
       width: 100%;
