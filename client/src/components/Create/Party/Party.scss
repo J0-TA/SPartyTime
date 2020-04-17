@@ -171,7 +171,6 @@
     flex-grow: inherit;
     flex-direction: column;
     overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
 
     .addedSong {
       display: flex;
@@ -188,7 +187,7 @@
     }
   }
   .resultCard {
-    height: 75px;
+    min-height: 75px;
     margin: 0 1rem .5rem 1rem;
     border: 1px solid #ffffff;
     border-radius: 5px;
